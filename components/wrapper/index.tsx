@@ -1,20 +1,16 @@
-import { FlexWrapper } from '@styles/common'
-import { Header } from './Header'
-import { Left } from './Left'
-import { Right } from './Right'
+import { FlexWrapper } from '@styles/common';
+import { SideBar } from './SideBar';
+import { Main } from './Main';
 
 type Props = {
 }
 
-export const Wrapper:React.FC<Props> = ({ children }) => {
-  return (
-    <>
-      <Header />
-      <FlexWrapper>
-        <Left />
-        {children}
-        <Right />
-      </FlexWrapper>
-    </>
-  )
-}
+export const Wrapper:React.FC<Props> = ({ children }) => (
+  <>
+    <FlexWrapper>
+      <SideBar />
+      {children}
+      <Main />
+    </FlexWrapper>
+  </>
+);

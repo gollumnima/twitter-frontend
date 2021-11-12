@@ -1,7 +1,17 @@
 import { Home } from '@pages/home';
+import { colors } from '@styles/colors';
 
-export default function Main() {
+const { BLACK } = colors;
+
+export default function App() {
   return (
-    <Home />
-  )
+    <div
+      style={{
+        backgroundColor: BLACK,
+        height: '100vh',
+      }}
+    >
+      <Home />
+    </div>
+  );
 }
