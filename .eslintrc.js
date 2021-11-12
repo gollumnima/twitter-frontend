@@ -14,9 +14,8 @@ module.exports = {
     'airbnb-base',
     'plugin:@typescript-eslint/eslint-recommended',
   ],
-  "extends": ["airbnb", "airbnb/hooks"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": ["js", "jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": ["ts", "tsx"] }],
     "arrow-parens": ["warn", "as-needed"],
     "no-unused-vars": ["off"],
     "no-console": ["off"],
@@ -25,6 +24,7 @@ module.exports = {
     "react/jsx-props-no-spreading": ["warn"],
     "react/prop-types": ["off"],
     'no-underscore-dangle': ['off'],
+    "indent": ['error', 2],
   },
   "settings": {
     "import/resolver": {
