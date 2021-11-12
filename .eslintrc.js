@@ -30,7 +30,8 @@ module.exports = {
     "import/resolver": {
       "node": {
         "moduleDirectory": ["node_modules", "."]
-      }
+      },
+      "typescript": {} // ts import issue fix
     }
   }
 };
