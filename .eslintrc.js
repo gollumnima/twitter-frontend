@@ -1,18 +1,31 @@
 module.exports = {
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2020": true,
+  },
   extends: [
     'airbnb',
+    'airbnb/hooks',
     'airbnb-typescript',
   ],
+  parserOptions: {
+    project: './tsconfig.json'
+  },
+  rules: {
+    'react/function-component-definition': 'off',
+    'import/prefer-default-export': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-props-no-spreading': 'warn',
+  },
 };
 //   parser: '@typescript-eslint/parser',
 //   parserOptions: {
 //     project: './tsconfig.json',
 //     sourceType: 'module'
-//   },
-//   "env": {
-//     "node": true,
-//     "browser": true,
-//     "es2020": true,
 //   },
 //   plugins: ['react', '@typescript-eslint'],
 //   extends: [
