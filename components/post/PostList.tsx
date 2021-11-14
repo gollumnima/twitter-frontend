@@ -1,4 +1,5 @@
-import { Compose } from '@components/post/Compose';
+import { useState } from 'react';
+import { ComposeContainer } from '@components/post/ComposeContainer';
 import { Post } from './index';
 
 const tempPosts = [
@@ -44,20 +45,24 @@ const tempPosts = [
   },
 ];
 
-export const PostList = () => (
-  <div>
-    <Compose />
-    {
-      tempPosts.map((post, idx) => (
-        <Post
-          key={idx}
-          profileSrc={post.profileSrc}
-          name={post.name}
-          account={post.account}
-          timestamp={post.timestamp}
-          contents={post.contents}
-          contentsSrc={post.contentsSrc}
-        />
-      ))}
-  </div>
-);
+export const PostList = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <div>
+      <ComposeContainer setValue={setValue} value={value} />
+      {
+        tempPosts.map((post, idx) => (
+          <Post
+            key={idx}
+            profileSrc={post.profileSrc}
+            name={post.name}
+            account={post.account}
+            timestamp={post.timestamp}
+            contents={post.contents}
+            contentsSrc={post.contentsSrc}
+          />
+        ))}
+    </div>
+  );
+};

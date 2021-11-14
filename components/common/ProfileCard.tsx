@@ -9,7 +9,7 @@ type String = {
   primary?: boolean,
   margin?: boolean,
   size?: boolean
-}
+};
 
 const Span = styled.span`
   display: block;
@@ -27,7 +27,7 @@ type ProfileInfo = {
   account: string,
   // buttonType: "more",
   size: 'small'
-}
+};
 
 export const ProfileCard = ({
   src, name, account, size,

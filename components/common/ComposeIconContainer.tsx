@@ -19,7 +19,7 @@ const iconList = [
 export const ComposeIconContainer = () => (
   <FlexWrapper>
     {
-      iconList.map(icon => (
+      iconList.map((icon) => (
         <Icon
           key={icon.id}
           path={icon.path}

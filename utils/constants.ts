@@ -3,3 +3,9 @@ export const SIZE = {
   MEDIUM: 'MEDIUM',
   SMALL: 'SMALL',
 };
+
+export enum MySize {
+  LARGE = 'LARGE',
+  MEDIUM = 'MEDIUM',
+  SMALL = 'SMALL',
+}

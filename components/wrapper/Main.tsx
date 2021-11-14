@@ -1,4 +1,4 @@
-import { Compose } from '@components/post/Compose';
+import { Compose } from '@components/post/ComposeContainer';
 import { Header } from './Header';
 
 export const Main = () => (

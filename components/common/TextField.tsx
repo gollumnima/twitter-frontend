@@ -1,12 +1,12 @@
 import { useState, ChangeEvent } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { colors } from '@styles/colors';
 
 const { BLACK, LIGHT_GRAY } = colors;
 
 const Container = styled.div`
   width: 500px;
-`
+`;
 
 const Input = styled.input`
   all: unset;
@@ -18,13 +18,16 @@ const Input = styled.input`
     color: ${LIGHT_GRAY};
     font-size: 17px;
   }
-`
+`;
 
-export const TextField = () => {
-  const [value, setValue] = useState('');
-  
+type Props = {
+  value: string;
+  setValue: (value: string) => void;
+};
+
+export const TextField: React.FC<Props> = ({ value, setValue }) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-  
+
   return (
     <Container>
       <Input
@@ -34,6 +37,6 @@ export const TextField = () => {
         value={value}
       />
     </Container>
-    
-  )
-}
+
+  );
+};

@@ -1,4 +1,4 @@
-import { Compose } from '@components/post/Compose';
+import { Compose } from '@components/post/ComposeContainer';
 import { PostList } from '@components/post/PostList';
 import { Wrapper } from '@components/wrapper';
 

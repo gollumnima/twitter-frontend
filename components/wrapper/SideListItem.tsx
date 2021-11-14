@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FlexWrapper } from '@styles/common';
 import { colors } from '@styles/colors';
 
-const { LIGHT_GRAY, HOVER_BLACK, BLING } = colors;
+const { LIGHT_GRAY, HOVER_BLACK } = colors;
 
 interface ListItemType {
   id ?: number,

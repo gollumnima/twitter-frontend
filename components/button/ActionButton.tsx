@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
-import { SIZE } from '@utils/constants';
+import { SIZE, MySize } from '@utils/constants';
 
 const {
   WHITE, LIGHT_BLUE, LIGHT_GRAY, BLACK,
 } = colors;
 const { SMALL, MEDIUM, LARGE } = SIZE;
 
-type String = {
-  size?: string,
-  title?: string,
-  fontColor?: string
-}
+type Props = {
+  size?: string;
+  title?: string;
+  fontColor?: string;
+};
 
-const Button = styled.button<{size: string}>`
+const Button = styled.button<{ size: string }>`
 all: unset;
 text-align: center;
 padding: 16px 16px;
@@ -31,27 +31,43 @@ ${({ size }) => {
     if (size === LARGE) {
       return 'width: 225px';
     }
+    return '';
   }}
 
 `;
 
-const Span = styled.span`
+const Span = styled.span<{ size: string }>`
   font-size: 17px;
   font-weight: 700;
 
-  ${({ fontColor }) => {
-    if (fontColor === WHITE) {
-      return `color: ${WHITE}`;
-    }
-    return `color: ${BLACK}`;
-  }}
+  font-size: ${({ size }) => ({ [SMALL]: 10, [MEDIUM]: 15 }[size])}px;
+  /* width: ${({ size }) => ({ [SMALL]: 10, [MEDIUM]: 15 }[size])}px; */
 `;
 
-export const ActionButton = ({ size, title, fontColor }:String) => (
+// ${({ size }) => {
+//   if (size === SMALL) return 'font-size: 10px';
+//   if (size === MEDIUM) return 'font-size: 15px';
+//   return 'font-size: 17px';
+// }
+// }
+// ${({ fontColor }) => {
+//   if (fontColor === WHITE) {
+//     return `color: ${WHITE}`;
+//   }
+//   return `color: ${BLACK}`;
+// }}
+
+export const ActionButton = ({ size = SMALL, title, fontColor }: Props) => (
   <Button
     size={size}
     style={{ backgroundColor: fontColor === WHITE ? LIGHT_BLUE : LIGHT_GRAY }}
   >
-    <Span fontColor={fontColor}>{title}</Span>
+    <Span
+      size={size}
+      style={{ color: fontColor === WHITE ? WHITE : BLACK }}
+    >
+      {title}
+
+    </Span>
   </Button>
 );

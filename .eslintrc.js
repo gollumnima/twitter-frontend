@@ -20,6 +20,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'warn',
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-props-no-spreading': 'warn',
+    'react/require-default-props': 'off'
   },
 };
 //   parser: '@typescript-eslint/parser',
