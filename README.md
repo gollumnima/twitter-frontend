@@ -1,4 +1,4 @@
-# 📷 Twitter Project
+# 🐦 Twitter Project
 
 > 트위터의 기능 중 CRUD에 초점을 맞춰 코드를 작성해보는 프로젝트를 진행하고 있습니다.
 > TypeScript를 이용한 타입 검증으로 보다 효율적인 코드를 짜기 위한 노력을 하고있습니다.
