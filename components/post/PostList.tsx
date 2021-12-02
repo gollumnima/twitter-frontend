@@ -1,73 +1,76 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getPost, getPosts } from '@store/post';
 import { ComposeContainer } from '@components/post/ComposeContainer';
+import { twitterAPI } from '@utils/axios.wrapper';
+import { useAppSelector } from '@utils/hooksUtil';
 import { Post } from './index';
 
-const tempPosts = [
-  {
-    profileSrc: 'https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg',
-    name: 'ABC',
-    account: 'asdlkjaslkf',
-    timestamp: 1234,
-    contents: '하하하하하1123',
-    contentsSrc: [],
-  },
-  {
-    profileSrc: 'https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg',
-    name: 'ABCDF',
-    account: 'asdlkjaslkf',
-    timestamp: 1234,
-    contents: 'fkfklkslkdjflksjflksjdflasjfdlasjdflsajflsajdfjsdlfjasdfjslfj',
-    contentsSrc: [],
-  },
-  {
-    profileSrc: 'https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg',
-    name: 'ABC@@S',
-    account: 'asdlkjaslkf',
-    timestamp: 1234,
-    contents: '오늘 저녁은 카레로 해먹을꺼야. 돼지고기 카레를 먹을까 아니면 그냥 야채커레를 끓일까 고민쥬ㅜㅇ쓰 님들아 추천좀',
-    contentsSrc: [],
-  },
-  {
-    profileSrc: 'https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg',
-    name: 'ABCDD',
-    account: 'asdlkjaslkf',
-    timestamp: 1234,
-    contents: '하하하하하1123',
-    contentsSrc: [],
-  },
-  {
-    profileSrc: 'https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg',
-    name: 'ABCdf',
-    account: 'asdlkjaslkf',
-    timestamp: 1234,
-    contents: '하하하하하1123',
-    contentsSrc: [],
-  },
-];
-
 export const PostList = () => {
+  const dispatch = useDispatch();
+  const postList = useAppSelector((state) => state.post.postList);
+
   const [value, setValue] = useState('');
-  const onSubmit = (post: string) => tempPosts.concat({
-    profileSrc: 'https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg',
-    name: 'ABCdf',
-    account: 'asdlkjaslkf',
-    timestamp: 1234,
-    contents: post,
-    contentsSrc: [],
-  });
+  const [postID, setPostID] = useState(null);
+  const [content, setContent] = useState('');
+  const [imageURL, setImageURL] = useState('');
+
+  const handleTempPost = async () => {
+    const { data } = await twitterAPI.post('/api/posts');
+    setPostID(data.id);
+    dispatch(getPost(data.id));
+  };
+
+  const handleFileChange = async (e) => {
+    e.preventDefault();
+    const [file] = e.target.files;
+    const formData = new FormData();
+    formData.append('file', file);
+    console.log(file, 'FILE');
+    const { data } = await twitterAPI.post(
+      `/api/posts/${postID}/image`,
+      formData,
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      },
+    );
+    setImageURL(data.url);
+    console.log(postID, 'post ID');
+    console.log(data, '파일 데이타');
+  };
+
+  const onSubmit = async () => {
+    await twitterAPI.put(`/api/posts/${postID}`, {
+      content: value,
+      status: 'PUBLISHED',
+    });
+    console.log('수정왈');
+  };
+
+  useEffect(() => {
+    handleTempPost();
+    dispatch(getPosts());
+  }, []);
 
   return (
     <div>
-      <ComposeContainer setValue={setValue} value={value} onSubmit={onSubmit} />
+      <ComposeContainer
+        setValue={setValue}
+        value={value}
+        onSubmit={onSubmit}
+        onFileChange={handleFileChange}
+      />
       {
-        tempPosts.map((post, id) => (
+        postList?.map((post, id) => (
           <Post
             key={`${Date.now()}_${id}`}
             profileSrc={post.profileSrc}
             name={post.name}
             account={post.account}
             timestamp={post.timestamp}
-            contents={post.contents}
+            contents={post.content}
             contentsSrc={post.contentsSrc}
           />
         ))

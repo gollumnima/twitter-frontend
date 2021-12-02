@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { Home } from '@pages/home';
+import { useAppSelector } from '@utils/hooksUtil';
+import { Feed } from '@pages/feed';
 import { FlexWrapper } from '@styles/common';
 import { ActionButton } from '@components/button/ActionButton';
-
 import { SIZE } from '@utils/constants';
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { getSelf } from '@store/user';
 
 const { MEDIUM, LARGE } = SIZE;
 const {
@@ -33,9 +34,16 @@ const Span = styled.span`
   color: ${WHITE};
 `;
 
-export default function App() {
+export default function Content() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const userInfo = useAppSelector((state) => state.user.userInfo);
 
+  console.log(userInfo, '메인 유정');
+
+  useEffect(() => {
+    dispatch(getSelf());
+  }, []);
   return (
     <div
       style={{
@@ -44,9 +52,8 @@ export default function App() {
       }}
     >
       {
-        false
-          ? <Home />
-
+        userInfo.created_at
+          ? <Feed />
           : (
             <FlexWrapper>
               <img
@@ -66,23 +73,19 @@ export default function App() {
                 <div>
                   <Span size={LARGE}>지금 일어나고 있는 일</Span>
                   <Span size={MEDIUM}>오늘 트위터에 가입하세요</Span>
-                  <Link href="/signup" passHref>
-                    <a>
-                      <ActionButton
-                        size={LARGE}
-                        title="회원가입"
-                        fontColor={WHITE}
-                        onSubmit={() => { }}
-                      />
-                    </a>
-                  </Link>
+                  <ActionButton
+                    size={LARGE}
+                    title="회원가입"
+                    fontColor={WHITE}
+                    onSubmit={() => router.push('/signup')}
+                  />
                 </div>
                 <span style={{ color: WHITE, display: 'block', margin: '40px 0 24px 0' }}>이미 트위터에 가입하셨나요?</span>
                 <ActionButton
                   size={LARGE}
                   title="로그인"
                   fontColor={LIGHT_BLUE}
-                  onSubmit={() => { }}
+                  onSubmit={() => router.push('/login')}
                 />
               </div>
             </FlexWrapper>

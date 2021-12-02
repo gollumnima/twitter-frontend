@@ -5,7 +5,7 @@ type String = {
   size: string,
 };
 
-export const Home = () => (
+export const Feed = () => (
   <Wrapper>
     <PostList />
   </Wrapper>

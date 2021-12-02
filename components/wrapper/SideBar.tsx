@@ -1,12 +1,18 @@
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ProfileCard } from '@components/common/ProfileCard';
 import { ActionButton } from '@components/button/ActionButton';
 import { colors } from '@styles/colors';
 import { SIZE } from '@utils/constants';
+import { logout } from '@store/user';
+import { useRouter } from 'next/router';
+import { useAppSelector } from '@utils/hooksUtil';
 import { SideListItem } from './SideListItem';
 
 const { SMALL, MEDIUM, LARGE } = SIZE;
-const { LIGHT_GRAY, WHITE, LINE_GRAY } = colors;
+const {
+  LIGHT_GRAY, WHITE, LINE_GRAY, BLACK,
+} = colors;
 
 const Nav = styled.nav`
   min-width: 275px;
@@ -48,33 +54,52 @@ const listItems = [
   },
 ];
 
-export const SideBar = () => (
-  <Nav>
-    <Svg>
-      <g>
-        <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" />
-      </g>
-    </Svg>
-    <Ul>
-      {listItems.map((item) => (
-        <SideListItem
-          key={`${item.id}_${Date.now()}`}
-          title={item.title}
-          path={item.path}
-        />
-      ))}
-    </Ul>
-    <ActionButton
-      fontColor={WHITE}
-      size={LARGE}
-      title="트윗하기"
-    />
-    <ProfileCard
-      src="https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg"
-      name="달리는개발자"
-      account="keep_code_ing"
-      // buttonType="more"
-      size="small"
-    />
-  </Nav>
-);
+export const SideBar = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push('/');
+  };
+
+  const { username, name, image_url: IMAGE_URL } = userInfo;
+
+  return (
+    <Nav>
+      <Svg>
+        <g>
+          <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" />
+        </g>
+      </Svg>
+      <Ul>
+        {listItems.map((item) => (
+          <SideListItem
+            key={`${item.id}_${Date.now()}`}
+            title={item.title}
+            path={item.path}
+          />
+        ))}
+      </Ul>
+      <ActionButton
+        fontColor={WHITE}
+        size={LARGE}
+        title="트윗하기"
+      />
+      <ActionButton
+        fontColor={BLACK}
+        size={LARGE}
+        title="로그아웃"
+        onSubmit={handleLogout}
+      />
+      <ProfileCard
+        src={IMAGE_URL}
+        name={name}
+        account={username}
+        // buttonType="more"
+        size="small"
+      />
+    </Nav>
+  );
+};

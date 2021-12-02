@@ -9,3 +9,5 @@ export enum MySize {
   MEDIUM = 'MEDIUM',
   SMALL = 'SMALL',
 }
+
+export const URL = 'http://localhost:8000';

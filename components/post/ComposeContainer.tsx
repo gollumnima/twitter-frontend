@@ -6,6 +6,7 @@ import { FlexWrapper } from '@styles/common';
 import { ActionButton } from '@components/button/ActionButton';
 import { SIZE } from '@utils/constants';
 import { colors } from '@styles/colors';
+import { useAppSelector } from '@utils/hooksUtil';
 
 const { MEDIUM, LARGE } = SIZE;
 const {
@@ -26,25 +27,31 @@ type Props = {
   onSubmit: (e: React.MouseEvent) => void;
 };
 
-export const ComposeContainer: React.FC<Props> = ({ setValue, value, onSubmit }) => (
-  <ComposeWrapper>
-    <FlexWrapper>
-      <Avatar
-        src="https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg"
-        size={LARGE}
-      />
-      <div style={{ width: '100%' }}>
-        <TextField setValue={setValue} value={value} />
-        <BottomWrapper>
-          <ComposeIconContainer />
-          <ActionButton
-            size={MEDIUM}
-            title="트윗하기"
-            fontColor={WHITE}
-            onSubmit={onSubmit}
-          />
-        </BottomWrapper>
-      </div>
-    </FlexWrapper>
-  </ComposeWrapper>
-);
+export const ComposeContainer: React.FC<Props> = ({
+  setValue, value, onSubmit, onFileChange,
+}) => {
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const { image_url: IMAGE_URL } = userInfo;
+  return (
+    <ComposeWrapper>
+      <FlexWrapper>
+        <Avatar
+          src={IMAGE_URL}
+          size={LARGE}
+        />
+        <div style={{ width: '100%' }}>
+          <TextField setValue={setValue} value={value} />
+          <BottomWrapper>
+            <ComposeIconContainer onFileChange={onFileChange} />
+            <ActionButton
+              size={MEDIUM}
+              title="트윗하기"
+              fontColor={WHITE}
+              onSubmit={onSubmit}
+            />
+          </BottomWrapper>
+        </div>
+      </FlexWrapper>
+    </ComposeWrapper>
+  );
+};
