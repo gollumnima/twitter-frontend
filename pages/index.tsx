@@ -8,7 +8,6 @@ import { SIZE } from '@utils/constants';
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { getSelf } from '@store/user';
 
 const { MEDIUM, LARGE } = SIZE;
 const {
@@ -41,9 +40,6 @@ export default function Content() {
 
   console.log(userInfo, '메인 유정');
 
-  useEffect(() => {
-    dispatch(getSelf());
-  }, []);
   return (
     <div
       style={{
@@ -52,7 +48,7 @@ export default function Content() {
       }}
     >
       {
-        userInfo.created_at
+        userInfo?.created_at
           ? <Feed />
           : (
             <FlexWrapper>

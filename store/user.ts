@@ -12,7 +12,7 @@ type UserStateType = {
     image_url: string;
     name: string;
     updated_at: string;
-  }
+  },
 };
 const initialState: UserStateType = {
   token: null,

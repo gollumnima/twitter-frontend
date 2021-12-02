@@ -8,6 +8,7 @@ const { LINE_GRAY, GRAY, LIGHT_GRAY } = colors;
 
 type String = {
   primary?: boolean,
+  title?: boolean,
 };
 
 const Container = styled.article`
@@ -19,16 +20,31 @@ const Container = styled.article`
 const Span = styled.span`
   display: block;
   color: ${(props: String) => (props.primary ? LIGHT_GRAY : GRAY)};
+  font-weight: ${(props: String) => (props.title ? 600 : 400)};
+`;
+
+const PostContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
 `;
 
 const ContentWrapper = styled.div`
   width: 100%;
+  margin-left: 14px;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
+`;
+
+const Image = styled.img`
+  width: 490px;
+  height: 200px;
+  border-radius: 20px;
+
+  margin-top: 8px;
 `;
 
 type PostProps<T, N> = {
@@ -44,7 +60,7 @@ export const Post = ({
   profileSrc, name, account, timestamp, contents, contentsSrc,
 }: PostProps<string, number>) => (
   <Container>
-    <FlexWrapper>
+    <PostContainer>
       <Avatar
         src={profileSrc}
         size="large"
@@ -52,8 +68,8 @@ export const Post = ({
       <ContentWrapper>
         <TitleWrapper>
           <FlexWrapper>
-            <Span primary>{name}</Span>
-            <Span>{account}</Span>
+            <Span primary title>{name}</Span>
+            <Span>{`@${account}`}</Span>
             <Span>{timestamp}</Span>
           </FlexWrapper>
           <IconButton
@@ -65,11 +81,13 @@ export const Post = ({
         {
           !!contentsSrc && contentsSrc.length > 0
           && contentsSrc.map((src) => (
-            <img src={src} />
+            <Image
+              src={src.url}
+            />
           ))
         }
       </ContentWrapper>
-    </FlexWrapper>
+    </PostContainer>
   </Container>
 
 );

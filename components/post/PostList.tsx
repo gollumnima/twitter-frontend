@@ -4,7 +4,30 @@ import { getPost, getPosts } from '@store/post';
 import { ComposeContainer } from '@components/post/ComposeContainer';
 import { twitterAPI } from '@utils/axios.wrapper';
 import { useAppSelector } from '@utils/hooksUtil';
+import { colors } from '@styles/colors';
+import styled from 'styled-components';
 import { Post } from './index';
+
+const {
+  WHITE, LINE_GRAY,
+} = colors;
+
+const FixedContainer = styled.div`
+  width: 100%;
+  border-top: 1px solid ${LINE_GRAY};
+  border-bottom: 1px solid ${LINE_GRAY};
+  height: 50px;
+
+`;
+
+const Span = styled.span`
+  display: block;
+  color: ${WHITE};
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 14px;
+  margin-top: 14px;
+`;
 
 export const PostList = () => {
   const dispatch = useDispatch();
@@ -26,7 +49,6 @@ export const PostList = () => {
     const [file] = e.target.files;
     const formData = new FormData();
     formData.append('file', file);
-    console.log(file, 'FILE');
     const { data } = await twitterAPI.post(
       `/api/posts/${postID}/image`,
       formData,
@@ -37,8 +59,6 @@ export const PostList = () => {
       },
     );
     setImageURL(data.url);
-    console.log(postID, 'post ID');
-    console.log(data, '파일 데이타');
   };
 
   const onSubmit = async () => {
@@ -56,6 +76,9 @@ export const PostList = () => {
 
   return (
     <div>
+      <FixedContainer>
+        <Span>홈</Span>
+      </FixedContainer>
       <ComposeContainer
         setValue={setValue}
         value={value}
@@ -67,11 +90,11 @@ export const PostList = () => {
           <Post
             key={`${Date.now()}_${id}`}
             profileSrc={post.profileSrc}
-            name={post.name}
-            account={post.account}
-            timestamp={post.timestamp}
+            name={post.User.name}
+            account={post.User.username}
+            timestamp={post.created_at}
             contents={post.content}
-            contentsSrc={post.contentsSrc}
+            contentsSrc={post.images ?? []}
           />
         ))
       }

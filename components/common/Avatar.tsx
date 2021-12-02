@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { colors } from '@styles/colors';
+
+const { LINE_GRAY } = colors;
 
 type String = {
   src: string,
@@ -6,6 +9,7 @@ type String = {
 };
 
 const Image = styled.img`
+  border: 1px solid ${LINE_GRAY};
   border-radius: 50%;
 `;
 

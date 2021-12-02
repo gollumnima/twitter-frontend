@@ -52,7 +52,6 @@ export default function SignUp() {
     //     password,
     //   }).then((res) => {
     //     const { data } = res;
-    //     console.log(data, '횐갑쓰');
     //     if (data) router.push('/');
     //   });
     // } catch (e) {

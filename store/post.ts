@@ -30,7 +30,7 @@ export const getPosts = () => async (dispatch: (param: object | null) => void) =
   }
 };
 
-export const getPost = () => async (dispatch: (param: object | null) => void) => {
+export const getPost = (postId) => async (dispatch: (param: object | null) => void) => {
   try {
     const { data } = await twitterAPI.get(`/api/posts/${postId}`);
     dispatch(setPost(data));
