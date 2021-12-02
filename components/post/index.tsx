@@ -8,7 +8,7 @@ const { LINE_GRAY, GRAY, LIGHT_GRAY } = colors;
 
 type String = {
   primary?: boolean,
-}
+};
 
 const Container = styled.article`
   border-bottom: 1px solid ${LINE_GRAY};
@@ -38,7 +38,7 @@ type PostProps<T, N> = {
   timestamp: N,
   contents: T,
   contentsSrc: T[]
-}
+};
 
 export const Post = ({
   profileSrc, name, account, timestamp, contents, contentsSrc,
@@ -64,7 +64,7 @@ export const Post = ({
         <Span primary>{contents}</Span>
         {
           !!contentsSrc && contentsSrc.length > 0
-          && contentsSrc.map(src => (
+          && contentsSrc.map((src) => (
             <img src={src} />
           ))
         }

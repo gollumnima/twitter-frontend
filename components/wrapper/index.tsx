@@ -3,14 +3,12 @@ import { SideBar } from './SideBar';
 import { Main } from './Main';
 
 type Props = {
-}
+};
 
-export const Wrapper:React.FC<Props> = ({ children }) => (
-  <>
-    <FlexWrapper>
-      <SideBar />
-      {children}
-      <Main />
-    </FlexWrapper>
-  </>
+export const Wrapper: React.FC<Props> = ({ children }) => (
+  <FlexWrapper>
+    <SideBar />
+    {children}
+    <Main />
+  </FlexWrapper>
 );

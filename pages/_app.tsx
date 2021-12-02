@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '@styles/theme';
 import '@styles/reset.css';
 
-function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -18,5 +18,3 @@ function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-export default App;

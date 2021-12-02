@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
 import { SIZE, MySize } from '@utils/constants';
@@ -11,6 +12,7 @@ type Props = {
   size?: string;
   title?: string;
   fontColor?: string;
+  onSubmit: (e: React.MouseEvent) => void;
 };
 
 const Button = styled.button<{ size: string }>`
@@ -57,10 +59,13 @@ const Span = styled.span<{ size: string }>`
 //   return `color: ${BLACK}`;
 // }}
 
-export const ActionButton = ({ size = SMALL, title, fontColor }: Props) => (
+export const ActionButton = ({
+  size = SMALL, title, fontColor, onSubmit,
+}: Props) => (
   <Button
     size={size}
     style={{ backgroundColor: fontColor === WHITE ? LIGHT_BLUE : LIGHT_GRAY }}
+    onClick={onSubmit}
   >
     <Span
       size={size}

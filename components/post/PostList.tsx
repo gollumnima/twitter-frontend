@@ -47,14 +47,22 @@ const tempPosts = [
 
 export const PostList = () => {
   const [value, setValue] = useState('');
+  const onSubmit = (post: string) => tempPosts.concat({
+    profileSrc: 'https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_960_720.jpg',
+    name: 'ABCdf',
+    account: 'asdlkjaslkf',
+    timestamp: 1234,
+    contents: post,
+    contentsSrc: [],
+  });
 
   return (
     <div>
-      <ComposeContainer setValue={setValue} value={value} />
+      <ComposeContainer setValue={setValue} value={value} onSubmit={onSubmit} />
       {
-        tempPosts.map((post, idx) => (
+        tempPosts.map((post, id) => (
           <Post
-            key={idx}
+            key={`${Date.now()}_${id}`}
             profileSrc={post.profileSrc}
             name={post.name}
             account={post.account}
@@ -62,7 +70,8 @@ export const PostList = () => {
             contents={post.contents}
             contentsSrc={post.contentsSrc}
           />
-        ))}
+        ))
+      }
     </div>
   );
 };

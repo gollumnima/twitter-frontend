@@ -23,9 +23,10 @@ const BottomWrapper = styled.div`
 type Props = {
   value: string;
   setValue: (value: string) => void;
-}
+  onSubmit: (e: React.MouseEvent) => void;
+};
 
-export const ComposeContainer: React.FC<Props> = ({ setValue, value }) => (
+export const ComposeContainer: React.FC<Props> = ({ setValue, value, onSubmit }) => (
   <ComposeWrapper>
     <FlexWrapper>
       <Avatar
@@ -40,6 +41,7 @@ export const ComposeContainer: React.FC<Props> = ({ setValue, value }) => (
             size={MEDIUM}
             title="트윗하기"
             fontColor={WHITE}
+            onSubmit={onSubmit}
           />
         </BottomWrapper>
       </div>
