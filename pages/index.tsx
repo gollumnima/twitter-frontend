@@ -38,8 +38,6 @@ export default function Content() {
   const dispatch = useDispatch();
   const userInfo = useAppSelector((state) => state.user.userInfo);
 
-  console.log(userInfo, '메인 유정');
-
   return (
     <div
       style={{

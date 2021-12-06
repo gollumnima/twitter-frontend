@@ -59,7 +59,7 @@ export default function Login() {
   };
 
   return (
-    <ModalContainer>
+    <ModalContainer onClick={() => router.push('/')}>
       <Span>트위터에 로그인하기</Span>
       <Form
         title="닉네임"

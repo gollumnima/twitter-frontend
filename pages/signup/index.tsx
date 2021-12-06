@@ -60,7 +60,7 @@ export default function SignUp() {
   };
 
   return (
-    <ModalContainer>
+    <ModalContainer onClick={() => router.push('/')}>
       <Span>계정을 생성하세요</Span>
       <Form
         title="닉네임"
