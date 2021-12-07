@@ -86,9 +86,10 @@ export const PostList = () => {
         onFileChange={handleFileChange}
       />
       {
-        postList?.map((post, id) => (
+        postList?.map((post, index) => (
           <Post
-            key={`${Date.now()}_${id}`}
+            postId={post.id}
+            key={`${Date.now()}_${index}`}
             profileSrc={post.profileSrc}
             name={post.User.name}
             account={post.User.username}

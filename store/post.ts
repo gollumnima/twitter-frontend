@@ -38,3 +38,8 @@ export const getPost = (postId) => async (dispatch: (param: object | null) => vo
     console.error(err);
   }
 };
+
+export const deletePost = (postId) => async (dispatch: (param: number) => void) => {
+  await twitterAPI.delete(`/api/posts/${postId}`);
+  await dispatch(getPosts());
+};

@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Avatar } from '@components/common/Avatar';
 import { FlexWrapper } from '@styles/common';
 import styled, { DefaultTheme } from 'styled-components';
 import { colors } from '@styles/colors';
 import { IconButton } from '@components/button/IconButton';
-import { ModalContainer } from '@components/modal/ModalContainer';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSelf } from '@store/user';
+import { deletePost } from '@store/post';
 
-const { LINE_GRAY, GRAY, LIGHT_GRAY } = colors;
+const {
+  LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE,
+} = colors;
 
 type String = {
   primary?: boolean,
@@ -49,6 +54,16 @@ const Image = styled.img`
   margin-top: 8px;
 `;
 
+const MenuItem = styled.li`
+  /* position: absolute; */
+  /* top: 15px; */
+  padding: 10px 10px;
+  background-color: ${BLACK};
+  color: ${WHITE};
+  border: 1px solid ${LINE_GRAY};
+  cursor: pointer;
+`;
+
 type PostProps<T, N> = {
   profileSrc: T,
   name: T,
@@ -59,9 +74,11 @@ type PostProps<T, N> = {
 };
 
 export const Post = ({
-  profileSrc, name, account, timestamp, contents, contentsSrc,
+  postId, profileSrc, name, account, timestamp, contents, contentsSrc,
 }: PostProps<string, number>) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user.userInfo);
 
   return (
     <Container>
@@ -75,13 +92,23 @@ export const Post = ({
             <FlexWrapper>
               <Span primary title>{name}</Span>
               <Span>{`@${account}`}</Span>
-              <Span>{timestamp}</Span>
+              <Span>{moment(timestamp, 'YYYYMMDD').fromNow()}</Span>
             </FlexWrapper>
-            <IconButton
-              shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
-              onClick={() => setIsOpen(!isOpen)}
-            />
             {
+              userInfo.name === name
+              && (
+                <IconButton
+                  option="MENU"
+                  shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
+                  onClick={() => setIsOpen(!isOpen)}
+                  isOpen={isOpen}
+                >
+                  <MenuItem onClick={() => dispatch(deletePost(postId))}>이 트윗 삭제하기</MenuItem>
+                  <MenuItem>이 트윗 좋아요 하기</MenuItem>
+                </IconButton>
+              )
+            }
+            {/* {
               isOpen
               && (
                 <div style={{
@@ -91,8 +118,7 @@ export const Post = ({
                   <span>TEST</span>
                 </div>
               )
-            }
-
+            } */}
           </TitleWrapper>
           <Span primary>{contents}</Span>
           {
