@@ -6,5 +6,6 @@ export const colors = {
   LINE_GRAY: '#2F3336',
   WHITE: '#FFF',
   LIGHT_BLUE: '#1D9BF0',
-  BLING: '#CD59B2',
+  LIGHT_RED: '#F91880',
+  LIGHT_GREEN: '#00BA7C',
 };

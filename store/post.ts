@@ -30,7 +30,7 @@ export const getPosts = () => async (dispatch: (param: object | null) => void) =
   }
 };
 
-export const getPost = (postId) => async (dispatch: (param: object | null) => void) => {
+export const getPost = (postId: number) => async (dispatch: (param: object | null) => void) => {
   try {
     const { data } = await twitterAPI.get(`/api/posts/${postId}`);
     dispatch(setPost(data));
@@ -39,7 +39,19 @@ export const getPost = (postId) => async (dispatch: (param: object | null) => vo
   }
 };
 
-export const deletePost = (postId) => async (dispatch: (param: number) => void) => {
+export const deletePost = (postId: number) => async (dispatch: (param: number) => void) => {
   await twitterAPI.delete(`/api/posts/${postId}`);
+  await dispatch(getPosts());
+};
+
+export const likePost = (postId: number) => async (dispatch: () => void) => {
+  await twitterAPI.post(`/api/posts/${postId}/like`);
+  await dispatch(getPost(postId));
+  await dispatch(getPosts());
+};
+
+export const unlikePost = (postId: number) => async (dispatch: () => void) => {
+  await twitterAPI.delete(`/api/posts/${postId}/like`);
+  await dispatch(getPost(postId));
   await dispatch(getPosts());
 };

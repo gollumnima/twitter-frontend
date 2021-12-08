@@ -5,9 +5,10 @@ const { LIGHT_GRAY } = colors;
 
 type Props = {
   shape: string;
-  option: string;
-  isOpen: boolean;
+  option?: string;
+  isOpen?: boolean;
   onClick: () => void;
+  color?: string;
 };
 
 const Svg = styled.svg`
@@ -30,7 +31,7 @@ const Container = styled.div`
 `;
 
 export const IconButton: React.FC<Props> = ({
-  shape, option, isOpen, onClick, children,
+  shape, option, isOpen, onClick, children, color,
 }) => (
   option === 'MENU'
     ? (
@@ -49,7 +50,9 @@ export const IconButton: React.FC<Props> = ({
       </Container>
     )
     : (
-      <Svg onClick={onClick}>
+      <Svg
+        onClick={onClick}
+      >
         <g>
           <path d={shape} />
         </g>

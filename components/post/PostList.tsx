@@ -66,7 +66,6 @@ export const PostList = () => {
       content: value,
       status: 'PUBLISHED',
     });
-    console.log('수정왈');
   };
 
   useEffect(() => {
