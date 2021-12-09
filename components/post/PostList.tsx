@@ -73,6 +73,7 @@ export const PostList = () => {
     dispatch(getPosts());
   }, []);
 
+  console.log(postList, 'post list');
   return (
     <div>
       <FixedContainer>
@@ -88,6 +89,7 @@ export const PostList = () => {
         postList?.map((post, index) => (
           <Post
             postId={post.id}
+            userId={post.user_id}
             key={`${Date.now()}_${index}`}
             profileSrc={post.profileSrc}
             name={post.User.name}
@@ -95,6 +97,7 @@ export const PostList = () => {
             timestamp={post.created_at}
             contents={post.content}
             contentsSrc={post.images ?? []}
+            likes={post.Likes}
           />
         ))
       }

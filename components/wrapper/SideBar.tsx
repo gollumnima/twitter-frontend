@@ -36,6 +36,12 @@ const Svg = styled.svg`
   cursor: pointer;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+`;
+
 const listItems = [
   {
     id: 0,
@@ -82,17 +88,22 @@ export const SideBar = () => {
           />
         ))}
       </Ul>
-      <ActionButton
-        fontColor={WHITE}
-        size={LARGE}
-        title="트윗하기"
-      />
-      <ActionButton
-        fontColor={BLACK}
-        size={LARGE}
-        title="로그아웃"
-        onSubmit={handleLogout}
-      />
+      <ButtonWrapper>
+        <ActionButton
+          fontColor={WHITE}
+          size={LARGE}
+          title="트윗하기"
+          onSubmit={() => { }}
+        />
+        <br />
+        <ActionButton
+          fontColor={BLACK}
+          size={LARGE}
+          title="로그아웃"
+          onSubmit={handleLogout}
+        />
+      </ButtonWrapper>
+      <br />
       <ProfileCard
         src={IMAGE_URL}
         name={name}

@@ -8,9 +8,13 @@ import { Modal } from './index';
 const { BLACK, WHITE, LIGHT_GRAY } = colors;
 
 type Props = {
-  logo?: string;
   onClick: () => void;
   option: string;
+};
+
+type StyledProps = {
+  option: string;
+  logo?: boolean;
 };
 
 const Container = styled.div`
@@ -31,6 +35,7 @@ const Wrapper = styled.div`
   left: 10%;
   padding: 1em;
   width: 600px;
+  height: ${(props: StyledProps) => (props.option === 'FULL' ? '' : '300px')};
   border-radius: 10px;
 `;
 
@@ -39,8 +44,8 @@ const Svg = styled.svg`
   width: 50px;
   height: 50px;
   fill: ${LIGHT_GRAY};
-  padding: ${(props: Props) => (props.logo ? '0 45%' : 0)};
-  cursor: ${(props: Props) => (props.logo ? 'none' : 'pointer')};
+  padding: ${(props: StyledProps) => (props.logo ? '0 45%' : 0)};
+  cursor: ${(props: StyledProps) => (props.logo ? 'none' : 'pointer')};
 
 `;
 
@@ -49,7 +54,7 @@ export const ModalContainer: React.FC<Props> = ({ children, onClick, option }) =
   return (
     <Modal>
       <Container>
-        <Wrapper>
+        <Wrapper option={option}>
           <div>
             <FlexWrapper>
               <Svg onClick={onClick}>

@@ -9,13 +9,19 @@ type Props = {
   isOpen?: boolean;
   onClick: () => void;
   color?: string;
+  activatedColor?: string;
 };
 
 const Svg = styled.svg`
-  fill: ${LIGHT_GRAY};
+  fill: ${(props) => props.activatedColor || LIGHT_GRAY};
   width: 20px;
   height: 20px;
   cursor: pointer;
+
+  &:hover {
+    fill: ${(props) => props.color || LIGHT_GRAY};
+
+  }
 `;
 
 const Ul = styled.ul`
@@ -31,7 +37,7 @@ const Container = styled.div`
 `;
 
 export const IconButton: React.FC<Props> = ({
-  shape, option, isOpen, onClick, children, color,
+  shape, option, isOpen, onClick, children, color, activatedColor,
 }) => (
   option === 'MENU'
     ? (
@@ -51,7 +57,10 @@ export const IconButton: React.FC<Props> = ({
     )
     : (
       <Svg
+        viewBox="0 0 24 24"
         onClick={onClick}
+        color={color}
+        activatedColor={activatedColor}
       >
         <g>
           <path d={shape} />
