@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar } from '@components/common/Avatar';
-import { FlexWrapper } from '@styles/common';
-import styled, { DefaultTheme } from 'styled-components';
-import { colors } from '@styles/colors';
-import { IconButton } from '@components/button/IconButton';
-import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import * as postAction from '@store/post';
 import router from 'next/router';
+import styled from 'styled-components';
+import moment from 'moment';
+import { FlexWrapper } from '@styles/common';
+import { Avatar } from '@components/common/Avatar';
+import { IconButton } from '@components/button/IconButton';
+import { colors } from '@styles/colors';
+import { SIZE } from '@utils/constants';
 
 const {
   LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE, LIGHT_GREEN, LIGHT_BLUE, LIGHT_RED,
 } = colors;
+const { MEDIUM } = SIZE;
 
 type String = {
   primary?: boolean;
@@ -137,7 +139,7 @@ export const Post = ({
       <PostContainer>
         <Avatar
           src={profileSrc}
-          size="large"
+          size={MEDIUM}
           onClick={() => router.push(`/user/${account}`)}
         />
         <ContentWrapper>

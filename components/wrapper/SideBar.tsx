@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useAppSelector } from '@utils/hooksUtil';
 import { SideListItem } from './SideListItem';
 
-const { SMALL, MEDIUM, LARGE } = SIZE;
+const { SMALL, LARGE } = SIZE;
 const {
   LIGHT_GRAY, WHITE, LINE_GRAY, BLACK,
 } = colors;
@@ -109,7 +109,7 @@ export const SideBar = () => {
         name={name}
         account={username}
         // buttonType="more"
-        size="small"
+        size={SMALL}
       />
     </Nav>
   );

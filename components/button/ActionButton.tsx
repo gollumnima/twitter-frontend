@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
-import { SIZE, MySize } from '@utils/constants';
+import { SIZE } from '@utils/constants';
 
 const {
   WHITE, LIGHT_BLUE, LIGHT_GRAY, BLACK,

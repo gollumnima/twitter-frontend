@@ -22,11 +22,11 @@ const Span = styled.span`
 `;
 
 type ProfileInfo = {
-  src: string,
-  name: string,
-  account: string,
+  src: string;
+  name: string;
+  account: string;
   // buttonType: "more",
-  size: 'small'
+  size: string;
 };
 
 export const ProfileCard = ({

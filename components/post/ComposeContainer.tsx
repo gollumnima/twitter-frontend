@@ -8,7 +8,7 @@ import { SIZE } from '@utils/constants';
 import { colors } from '@styles/colors';
 import { useAppSelector } from '@utils/hooksUtil';
 
-const { MEDIUM, LARGE } = SIZE;
+const { MEDIUM } = SIZE;
 const {
   WHITE, LINE_GRAY,
 } = colors;
@@ -51,7 +51,7 @@ export const ComposeContainer: React.FC<Props> = ({
       <OuterContainer>
         <Avatar
           src={IMAGE_URL}
-          size={LARGE}
+          size={MEDIUM}
         />
         <InnerContainer style={{ width: '100%' }}>
           <TextField setValue={setValue} value={value} />
