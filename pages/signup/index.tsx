@@ -60,32 +60,35 @@ export default function SignUp() {
   };
 
   return (
-    <ModalContainer onClick={() => router.push('/')}>
-      <Span>계정을 생성하세요</Span>
-      <Form
-        title="닉네임"
-        name="username"
-        value={username}
-        handleChange={handleChange}
-      />
-      <Form
-        title="이름"
-        name="name"
-        value={name}
-        handleChange={handleChange}
-      />
-      <Form
-        title="비밀번호"
-        name="password"
-        value={password}
-        handleChange={handleChange}
-      />
-      <ActionButton
-        size={LARGE}
-        fontColor={WHITE}
-        title="회원가입"
-        onSubmit={onSignUp}
-      />
+    <ModalContainer onClick={() => router.push('/')} option="FULL">
+      <>
+        <Span>계정을 생성하세요</Span>
+        <Form
+          title="닉네임"
+          name="username"
+          value={username}
+          handleChange={handleChange}
+        />
+        <Form
+          title="이름"
+          name="name"
+          value={name}
+          handleChange={handleChange}
+        />
+        <Form
+          title="비밀번호"
+          name="password"
+          value={password}
+          handleChange={handleChange}
+        />
+        <ActionButton
+          size={LARGE}
+          fontColor={WHITE}
+          title="회원가입"
+          onSubmit={onSignUp}
+        />
+      </>
+
     </ModalContainer>
   );
 }

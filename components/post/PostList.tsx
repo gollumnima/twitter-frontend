@@ -73,7 +73,6 @@ export const PostList = () => {
     dispatch(getPosts());
   }, []);
 
-  console.log(postList, 'post list');
   return (
     <div>
       <FixedContainer>

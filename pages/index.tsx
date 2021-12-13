@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useAppSelector } from '@utils/hooksUtil';
 import { Feed } from '@pages/feed';
@@ -7,12 +7,15 @@ import { ActionButton } from '@components/button/ActionButton';
 import { SIZE } from '@utils/constants';
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 
 const { MEDIUM, LARGE } = SIZE;
 const {
-  LIGHT_GRAY, WHITE, LIGHT_BLUE, BLACK,
+  LIGHT_GRAY, WHITE, LIGHT_BLUE,
 } = colors;
+
+interface StyledString {
+  size: string;
+}
 
 type Props = {
 };
@@ -26,22 +29,20 @@ const Svg = styled.svg`
 
 const Span = styled.span`
   display: block;
-  font-size: ${(props: String) => (props.size === LARGE ? '64px' : '32px')};
-  font-weight: ${(props: String) => (props.size === LARGE ? 700 : 600)};
-  padding: ${(props: String) => (props.size === LARGE ? '48px 0 48px 0' : '0 0 24px 0')};
+  font-size: ${(props: StyledString) => (props.size === LARGE ? '64px' : '32px')};
+  font-weight: ${(props: StyledString) => (props.size === LARGE ? 700 : 600)};
+  padding: ${(props: StyledString) => (props.size === LARGE ? '48px 0 48px 0' : '0 0 24px 0')};
 
   color: ${WHITE};
 `;
 
 export default function Content() {
   const router = useRouter();
-  const dispatch = useDispatch();
   const userInfo = useAppSelector((state) => state.user.userInfo);
 
   return (
     <div
       style={{
-        backgroundColor: BLACK,
         height: '100vh',
       }}
     >

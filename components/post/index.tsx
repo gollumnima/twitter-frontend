@@ -7,6 +7,7 @@ import { IconButton } from '@components/button/IconButton';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import * as postAction from '@store/post';
+import router from 'next/router';
 
 const {
   LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE, LIGHT_GREEN, LIGHT_BLUE, LIGHT_RED,
@@ -137,11 +138,12 @@ export const Post = ({
         <Avatar
           src={profileSrc}
           size="large"
+          onClick={() => router.push(`/user/${account}`)}
         />
         <ContentWrapper>
           <TitleWrapper>
             <FlexWrapper>
-              <Span primary title>{name}</Span>
+              <Span primary title="true">{name}</Span>
               <Span>{`@${account}`}</Span>
               <Span>{moment(timestamp, 'YYYYMMDD').fromNow()}</Span>
             </FlexWrapper>
@@ -170,9 +172,7 @@ export const Post = ({
             && (
               <Image
                 src={contentsSrc[0].url}
-                onClick={() => {
-
-                }}
+                onClick={() => { }}
               />
             )
           }
@@ -181,8 +181,8 @@ export const Post = ({
       </PostContainer>
       <IconWrapper>
         {
-          iconList.map((el) => (
-            <IconInnerWrapper>
+          iconList.map((el, i) => (
+            <IconInnerWrapper key={`${Date.now()}_${i}`}>
               <IconButton
                 shape={el.shape}
                 color={el.color}

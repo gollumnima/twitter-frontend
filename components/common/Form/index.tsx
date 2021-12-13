@@ -1,8 +1,15 @@
 import * as S from './style';
 
+type Props = {
+  handleChange: (param: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  title: string;
+  name: string;
+};
+
 export const Form = ({
   handleChange, value, title, name,
-}) => (
+}: Props) => (
   <S.Container>
     <S.Span>{title}</S.Span>
     <S.Input

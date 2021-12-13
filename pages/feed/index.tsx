@@ -9,5 +9,4 @@ export const Feed = () => (
   <Wrapper>
     <PostList />
   </Wrapper>
-
 );

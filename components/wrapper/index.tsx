@@ -1,14 +1,12 @@
-import { FlexWrapper } from '@styles/common';
+import { FlexWithFullWidth } from '@styles/common';
 import { SideBar } from './SideBar';
-import { Main } from './Main';
 
 type Props = {
 };
 
 export const Wrapper: React.FC<Props> = ({ children }) => (
-  <FlexWrapper>
+  <FlexWithFullWidth>
     <SideBar />
     {children}
-    <Main />
-  </FlexWrapper>
+  </FlexWithFullWidth>
 );

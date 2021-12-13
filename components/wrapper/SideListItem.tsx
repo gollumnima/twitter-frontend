@@ -5,9 +5,9 @@ import { colors } from '@styles/colors';
 const { LIGHT_GRAY, HOVER_BLACK } = colors;
 
 interface ListItemType {
-  id ?: number,
   title: string,
-  path: string
+  path: string,
+  onClick?: () => void;
 }
 
 const ListItemContainer = styled.div`
@@ -36,8 +36,8 @@ const Span = styled.span`
   margin-left: 15px;
 `;
 
-export const SideListItem = ({ path, title }: ListItemType) => (
-  <ListItemContainer>
+export const SideListItem = ({ path, title, onClick }: ListItemType) => (
+  <ListItemContainer onClick={onClick}>
     <FlexWrapper>
       <Svg>
         <g>

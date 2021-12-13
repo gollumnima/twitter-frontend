@@ -2,21 +2,34 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { twitterAPI } from '@utils/axios.wrapper';
 import { authToken } from '@utils/localStorage.wrapper';
 
+interface IUserInfo {
+  id: number;
+  created_at: string;
+  deleted_at: string | null;
+  username: string;
+  image_url: string;
+  name: string;
+  updated_at: string;
+}
+
 type UserStateType = {
   token: string | null;
-  userInfo: {
-    id: number;
-    created_at: string;
-    deleted_at: string | null;
-    username: string;
-    image_url: string;
-    name: string;
-    updated_at: string;
-  },
+  userInfo: IUserInfo
+  foundUser: IUserInfo;
 };
+
 const initialState: UserStateType = {
   token: null,
   userInfo: {
+    id: 0,
+    created_at: '',
+    deleted_at: '',
+    username: '',
+    image_url: '',
+    name: '',
+    updated_at: '',
+  },
+  foundUser: {
     id: 0,
     created_at: '',
     deleted_at: '',
@@ -34,13 +47,16 @@ export const userSlice = createSlice({
     setUserInfo: (state, action: PayloadAction) => {
       state.userInfo = action.payload;
     },
+    setFoundUser: (state, action: PayloadAction) => {
+      state.foundUser = action.payload;
+    },
   },
 });
 
 export default userSlice.reducer;
 
 const {
-  setUserInfo,
+  setUserInfo, setFoundUser,
 } = userSlice.actions;
 
 // eslint-disable-next-line max-len
@@ -85,3 +101,12 @@ export const logout = () => (dispatch: (param: object | null) => void) => {
   authToken.remove();
   dispatch(setUserInfo(null));
 };
+
+export const findUser = (username: string) => (async (dispatch: (param: object | null) => void) => {
+  try {
+    const { data } = await twitterAPI.get(`/api/users/username/${username}`);
+    dispatch(setFoundUser(data));
+  } catch (err) {
+    console.error(err);
+  }
+});
