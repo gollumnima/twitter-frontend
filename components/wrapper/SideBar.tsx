@@ -45,7 +45,7 @@ const ButtonWrapper = styled.div`
 export const SideBar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userInfo = useAppSelector((state) => state.user.userInfo ?? {});
 
   const handleLogout = () => {
     dispatch(logout());

@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
 
@@ -16,24 +17,40 @@ const Svg = styled.svg`
   cursor: pointer;
 `;
 
-export const Icon = ({ path, onFileChange }: String) => (
-  onFileChange
-    ? (
-      <>
-        <input type="file" onChange={onFileChange} />
+const UploadInput = styled.input`
+  display: none;
+`;
+
+export const Icon = ({ path, onFileChange }: String) => {
+  const ref = useRef();
+  const handleUploadImage = () => {
+    if (!ref) return;
+    ref.current.click();
+  };
+
+  return (
+    onFileChange
+      ? (
+        <>
+          <UploadInput
+            type="file"
+            ref={ref}
+            onChange={onFileChange}
+          />
+          <Svg onClick={handleUploadImage}>
+            <g>
+              <path d={path} />
+            </g>
+          </Svg>
+        </>
+      )
+      : (
         <Svg>
           <g>
             <path d={path} />
           </g>
         </Svg>
-      </>
-    )
-    : (
-      <Svg>
-        <g>
-          <path d={path} />
-        </g>
-      </Svg>
-    )
+      )
 
-);
+  );
+};
