@@ -9,7 +9,9 @@ const Container = styled.div`
   width: 500px;
 `;
 
-const Input = styled.textarea`
+const Input = styled.textarea.attrs(() => ({
+  type: 'text',
+}))`
   all: unset;
   width: 100%;
   /* min-height: ${minHeight}; */
@@ -40,7 +42,6 @@ export const TextField: React.FC<Props> = ({ value, setValue }) => {
     // when delete texts, shrink textarea
     ref.current.style.height = 'inherit';
     ref.current.style.height = `${Math.max(ref.current.style.scrollHeight, minHeight)}px`;
-    console.log('ref', ref.current.style);
   }, [value]);
 
   return (

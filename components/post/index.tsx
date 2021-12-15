@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as postAction from '@store/post';
 import router from 'next/router';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import moment from 'moment';
 import { FlexWrapper } from '@styles/common';
 import { Avatar } from '@components/common/Avatar';
@@ -16,8 +16,9 @@ const {
 const { MEDIUM } = SIZE;
 
 type String = {
-  primary?: boolean;
-  title?: boolean;
+  primary?: string;
+  title?: string;
+  underline?: string;
 };
 
 const Container = styled.article`
@@ -30,6 +31,13 @@ const Span = styled.span`
   color: ${(props: String) => (props.primary ? LIGHT_GRAY : GRAY)};
   font-weight: ${(props: String) => (props.title ? 600 : 400)};
   margin-right: 10px;
+
+  ${(props: String) => props.underline && css`
+    &:hover {
+      border-bottom: 1px solid ${WHITE};
+      cursor: pointer;
+    }
+  `}
   
   &:last-child {
     margin-right: 0;
@@ -145,30 +153,36 @@ export const Post = ({
         <ContentWrapper>
           <TitleWrapper>
             <FlexWrapper>
-              <Span primary title="true">{name}</Span>
+              <Span
+                primary="true"
+                title="true"
+                underline="true"
+                onClick={() => router.push(`/user/${account}`)}
+              >
+                {name}
+              </Span>
               <Span>{`@${account}`}</Span>
               <Span>{moment(timestamp, 'YYYYMMDD').fromNow()}</Span>
             </FlexWrapper>
-            {
-              userInfo.name === name
-              && (
-                <IconButton
-                  option="MENU"
-                  shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
-                  onClick={() => setIsOpen(!isOpen)}
-                  isOpen={isOpen}
-                >
-                  <MenuItem onClick={handleDeletePost}>이 트윗 삭제하기</MenuItem>
-                  <MenuItem onClick={handleLikePost}>
-                    {
-                      isLikedPost ? '좋아요 취소하기' : '좋아요 하기'
-                    }
-                  </MenuItem>
-                </IconButton>
-              )
-            }
+
+            <IconButton
+              option="MENU"
+              shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
+              onClick={() => setIsOpen(!isOpen)}
+              isOpen={isOpen}
+            >
+              {
+                userInfo.name === name
+                && <MenuItem onClick={handleDeletePost}>이 트윗 삭제하기</MenuItem>
+              }
+              <MenuItem onClick={handleLikePost}>
+                {
+                  isLikedPost ? '좋아요 취소하기' : '좋아요 하기'
+                }
+              </MenuItem>
+            </IconButton>
           </TitleWrapper>
-          <Span primary>{contents}</Span>
+          <Span primary="true">{contents}</Span>
           {
             contentsSrc.length > 0
             && (
