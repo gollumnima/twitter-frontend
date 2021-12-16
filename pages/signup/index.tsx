@@ -1,15 +1,14 @@
-import React, { useReducer } from 'react';
 import { useRouter } from 'next/router';
+import { useAppDispatch, useReducerState } from '@utils/hooksUtil';
 import { ModalContainer } from '@components/modal/ModalContainer';
-import { Form } from '@components/common/Form';
 import { ActionButton } from '@components/button/ActionButton';
 import { colors } from '@styles/colors';
 import { SIZE } from '@utils/constants';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { signUp } from '@store/user';
+import { ShortInput } from '@components/common/ShortInput';
 
-const { SMALL, MEDIUM, LARGE } = SIZE;
+const { SMALL, LARGE } = SIZE;
 const { LIGHT_GRAY, WHITE } = colors;
 type Props = {
 
@@ -21,65 +20,55 @@ const Span = styled.span`
   color: ${LIGHT_GRAY};
 `;
 
-const useReducerState = (initialState = {}) => {
-  const reducer = (prev, next) => ({ ...prev, ...next });
-  return useReducer(reducer, initialState);
-};
-
 export default function SignUp() {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [state, setState] = useReducerState({
     username: '',
     name: '',
     password: '',
+    description: '',
   });
 
-  const { username, name, password } = state;
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setState({ [e.target.name]: value });
-  };
+  const {
+    username, name, password, description,
+  } = state;
 
   const onSignUp = async () => {
-    await dispatch(signUp(username, name, password));
+    await dispatch(signUp(username, name, password, description));
     router.push('/');
-    // const url = 'http://localhost:8000';
-    // try {
-    //   axios.post(`${url}/api/users`, {
-    //     username,
-    //     name,
-    //     password,
-    //   }).then((res) => {
-    //     const { data } = res;
-    //     if (data) router.push('/');
-    //   });
-    // } catch (e) {
-    //   console.error(e);
-    // }
   };
 
   return (
-    <ModalContainer onClick={() => router.push('/')} option="FULL">
+    <ModalContainer
+      onClick={() => router.push('/')}
+      size={SMALL}
+    >
       <>
         <Span>계정을 생성하세요</Span>
-        <Form
+        <ShortInput
           title="닉네임"
           name="username"
           value={username}
-          handleChange={handleChange}
+          setValue={setState}
         />
-        <Form
+        <ShortInput
           title="이름"
           name="name"
           value={name}
-          handleChange={handleChange}
+          setValue={setState}
         />
-        <Form
+        <ShortInput
           title="비밀번호"
           name="password"
           value={password}
-          handleChange={handleChange}
+          setValue={setState}
+        />
+        <ShortInput
+          title="자기소개"
+          name="description"
+          value={description}
+          setValue={setState}
         />
         <ActionButton
           size={LARGE}

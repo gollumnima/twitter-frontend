@@ -19,13 +19,13 @@ type StyledProps = {
 const Image = styled.img`
   border: 1px solid ${LINE_GRAY};
   border-radius: 50%;
-  
+
   cursor: ${(props: StyledProps) => (props.isClickable ? 'pointer' : 'initial')};
 
   ${({ size }: StyledProps) => {
-    if (size === SMALL) return 'width: 40px';
-    if (size === MEDIUM) return 'width: 48px';
-    if (size === LARGE) return 'width: 130px';
+    if (size === SMALL) return ({ width: '40px', height: '40px' });
+    if (size === MEDIUM) return ({ width: '48px', height: '48px' });
+    if (size === LARGE) return ({ width: '130px', height: '130px' });
     return '';
   }}
 

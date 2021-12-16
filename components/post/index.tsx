@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import * as postAction from '@store/post';
 import router from 'next/router';
 import styled, { css } from 'styled-components';
@@ -110,8 +110,8 @@ export const Post = ({
   postId, userId, profileSrc, name, account, timestamp, contents, contentsSrc, likes,
 }: PostProps<string, number>) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user.userInfo);
+  const dispatch = useAppDispatch();
+  const userInfo = useAppSelector((state) => state.user.userInfo);
   const isLikedPost = likes.filter((item) => item.user_id === userId).length;
 
   const handleLikePost = () => (isLikedPost
@@ -142,6 +142,8 @@ export const Post = ({
       onClick: handleLikePost,
     },
   ];
+
+  if (!userInfo) return <></>;
   return (
     <Container>
       <PostContainer>

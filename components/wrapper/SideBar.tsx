@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ProfileCard } from '@components/common/ProfileCard';
 import { ActionButton } from '@components/button/ActionButton';
@@ -6,7 +5,7 @@ import { colors } from '@styles/colors';
 import { SIZE } from '@utils/constants';
 import { logout } from '@store/user';
 import { useRouter } from 'next/router';
-import { useAppSelector } from '@utils/hooksUtil';
+import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import { SideListItem } from './SideListItem';
 
 const { SMALL, LARGE } = SIZE;
@@ -40,16 +39,17 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  margin: 20px 0;
 `;
 
 export const SideBar = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const userInfo = useAppSelector((state) => state.user.userInfo ?? {});
 
   const handleLogout = () => {
-    dispatch(logout());
     router.push('/');
+    dispatch(logout());
   };
 
   const { username, name, image_url: IMAGE_URL } = userInfo;

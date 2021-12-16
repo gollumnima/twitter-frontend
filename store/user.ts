@@ -7,6 +7,7 @@ interface IUserInfo {
   created_at: string;
   deleted_at: string | null;
   username: string;
+  description: string;
   image_url: string;
   name: string;
   updated_at: string;
@@ -25,6 +26,7 @@ const initialState: UserStateType = {
     created_at: '',
     deleted_at: '',
     username: '',
+    description: '',
     image_url: '',
     name: '',
     updated_at: '',
@@ -34,6 +36,7 @@ const initialState: UserStateType = {
     created_at: '',
     deleted_at: '',
     username: '',
+    description: '',
     image_url: '',
     name: '',
     updated_at: '',
@@ -46,6 +49,7 @@ export const userSlice = createSlice({
   reducers: {
     setUserInfo: (state, action: PayloadAction) => {
       state.userInfo = action.payload;
+      console.log(action.payload, 'payload');
     },
     setFoundUser: (state, action: PayloadAction) => {
       state.foundUser = action.payload;

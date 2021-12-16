@@ -19,11 +19,11 @@ const Input = styled.input`
   display: block;
   margin-top: 5px;
   color: ${LIGHT_GRAY};
-
 `;
 
 const Span = styled.span`
   font-size: 15px;
+  font-weight: 700;
   color: ${LIGHT_GRAY};
 `;
 
@@ -31,14 +31,14 @@ type Props = {
   value: string;
   setValue: (value: string) => void;
   title: string;
+  name: string;
 };
 
 export const ShortInput: React.FC<Props> = ({
-  value, setValue, title,
+  value, setValue, title, name,
 }) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e, 'VAL');
-    setValue(e.target.value);
+    setValue({ [name]: e.target.value });
   };
 
   return (
@@ -47,6 +47,7 @@ export const ShortInput: React.FC<Props> = ({
       <Input
         onChange={onChange}
         value={value}
+        type={name === 'password' ? 'password' : 'text'}
       />
     </Container>
 

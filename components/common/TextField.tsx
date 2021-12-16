@@ -9,13 +9,11 @@ const Container = styled.div`
   width: 500px;
 `;
 
-const Input = styled.textarea.attrs(() => ({
-  type: 'text',
-}))`
+const Input = styled.textarea`
   all: unset;
   width: 100%;
-  /* min-height: ${minHeight}; */
-  /* resize: none; */
+  min-height: ${minHeight}; 
+  resize: none;
   
   padding: 5px 5px;  
   background-color: ${BLACK};
@@ -23,7 +21,6 @@ const Input = styled.textarea.attrs(() => ({
   ::placeholder {
     color: ${LIGHT_GRAY};
     font-size: 17px;
-
   }
 `;
 
@@ -41,7 +38,7 @@ export const TextField: React.FC<Props> = ({ value, setValue }) => {
     if (!ref.current) return;
     // when delete texts, shrink textarea
     ref.current.style.height = 'inherit';
-    ref.current.style.height = `${Math.max(ref.current.style.scrollHeight, minHeight)}px`;
+    ref.current.style.height = `${Math.max(ref.current.scrollHeight, minHeight)}px`;
   }, [value]);
 
   return (
@@ -51,12 +48,7 @@ export const TextField: React.FC<Props> = ({ value, setValue }) => {
         ref={ref}
         onChange={onChange}
         value={value}
-        style={{
-          minHeight,
-          resize: 'none',
-        }}
       />
     </Container>
-
   );
 };

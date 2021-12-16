@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { getPost, getPosts } from '@store/post';
 import { ComposeContainer } from '@components/post/ComposeContainer';
 import { twitterAPI } from '@utils/axios.wrapper';
-import { useAppSelector } from '@utils/hooksUtil';
+import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 import { Post } from './index';
@@ -30,7 +29,7 @@ const Span = styled.span`
 `;
 
 export const PostList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const postList = useAppSelector((state) => state.post.postList);
 
   const [value, setValue] = useState('');

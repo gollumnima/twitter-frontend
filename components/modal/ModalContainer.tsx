@@ -2,18 +2,19 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
+import { SIZE } from '@utils/constants';
 import { FlexWrapper } from '@styles/common';
 import { Modal } from './index';
 
 const { BLACK, WHITE, LIGHT_GRAY } = colors;
+const { SMALL, LARGE } = SIZE;
 
 type Props = {
   onClick: () => void;
-  option: string;
 };
 
 type StyledProps = {
-  option: string;
+  size: string;
   logo?: boolean;
 };
 
@@ -29,14 +30,13 @@ const Container = styled.div`
 const Wrapper = styled.div`
   background-color: ${BLACK};
   position: absolute;
-  top: 10%;
-  right: 10%;
-  bottom: 10%;
-  left: 10%;
+  top: ${(props: StyledProps) => ((props.size === LARGE) ? '10%' : '23%')};
+  left: 33%;
   padding: 1em;
   width: 600px;
-  height: ${(props: StyledProps) => (props.option === 'FULL' ? '' : '300px')};
+  height: ${(props: StyledProps) => (props.size === LARGE ? '700px' : '450px')};
   border-radius: 10px;
+  
 `;
 
 const Svg = styled.svg`
@@ -46,15 +46,14 @@ const Svg = styled.svg`
   fill: ${LIGHT_GRAY};
   padding: ${(props: StyledProps) => (props.logo ? '0 45%' : 0)};
   cursor: ${(props: StyledProps) => (props.logo ? 'none' : 'pointer')};
-
 `;
 
-export const ModalContainer: React.FC<Props> = ({ children, onClick, option }) => {
+export const ModalContainer: React.FC<Props> = ({ children, onClick, size }) => {
   const router = useRouter();
   return (
     <Modal>
       <Container>
-        <Wrapper option={option}>
+        <Wrapper size={size}>
           <div>
             <FlexWrapper>
               <Svg onClick={onClick}>
