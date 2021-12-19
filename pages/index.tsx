@@ -4,11 +4,10 @@ import { useAppSelector } from '@utils/hooksUtil';
 import { Feed } from '@pages/feed';
 import { FlexWrapper } from '@styles/common';
 import { ActionButton } from '@components/button/ActionButton';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
-const { MEDIUM, LARGE } = SIZE;
 const {
   LIGHT_GRAY, WHITE, LIGHT_BLUE,
 } = colors;
@@ -29,9 +28,9 @@ const Svg = styled.svg`
 
 const Span = styled.span`
   display: block;
-  font-size: ${(props: StyledString) => (props.size === LARGE ? '64px' : '32px')};
-  font-weight: ${(props: StyledString) => (props.size === LARGE ? 700 : 600)};
-  padding: ${(props: StyledString) => (props.size === LARGE ? '48px 0 48px 0' : '0 0 24px 0')};
+  font-size: ${(props: StyledString) => (props.size === Size.LARGE ? '64px' : '32px')};
+  font-weight: ${(props: StyledString) => (props.size === Size.LARGE ? 700 : 600)};
+  padding: ${(props: StyledString) => (props.size === Size.LARGE ? '48px 0 48px 0' : '0 0 24px 0')};
 
   color: ${WHITE};
 `;
@@ -66,10 +65,10 @@ export default function Content() {
                   </g>
                 </Svg>
                 <div>
-                  <Span size={LARGE}>지금 일어나고 있는 일</Span>
-                  <Span size={MEDIUM}>오늘 트위터에 가입하세요</Span>
+                  <Span size={Size.LARGE}>지금 일어나고 있는 일</Span>
+                  <Span size={Size.MEDIUM}>오늘 트위터에 가입하세요</Span>
                   <ActionButton
-                    size={LARGE}
+                    size={Size.LARGE}
                     title="회원가입"
                     fontColor={WHITE}
                     onSubmit={() => router.push('/signup')}
@@ -77,7 +76,7 @@ export default function Content() {
                 </div>
                 <span style={{ color: WHITE, display: 'block', margin: '40px 0 24px 0' }}>이미 트위터에 가입하셨나요?</span>
                 <ActionButton
-                  size={LARGE}
+                  size={Size.LARGE}
                   title="로그인"
                   fontColor={LIGHT_BLUE}
                   onSubmit={() => router.push('/login')}

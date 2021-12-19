@@ -9,7 +9,9 @@ const Container = styled.div`
   width: 500px;
 `;
 
-const Input = styled.textarea`
+const TextArea = styled.textarea<{
+  placeholder: string
+}>`
   all: unset;
   width: 100%;
   min-height: ${minHeight}; 
@@ -26,12 +28,12 @@ const Input = styled.textarea`
 
 type Props = {
   value: string;
-  setValue: (value: string) => void;
+  onChange: (value: string) => void;
 };
 
-export const TextField: React.FC<Props> = ({ value, setValue }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
+export const TextField: React.FC<Props> = ({ value, onChange }) => {
+  const ref = useRef<HTMLTextAreaElement | null>(null);
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value);
 
   useLayoutEffect(() => {
     if (!ref) return;
@@ -43,10 +45,10 @@ export const TextField: React.FC<Props> = ({ value, setValue }) => {
 
   return (
     <Container>
-      <Input
+      <TextArea
         placeholder="무슨 일이 일어나고 있나요?"
         ref={ref}
-        onChange={onChange}
+        onChange={handleChange}
         value={value}
       />
     </Container>

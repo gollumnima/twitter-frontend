@@ -1,10 +1,8 @@
-import { useRef, useLayoutEffect, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
 
-const {
-  BLACK, LIGHT_GRAY, LINE_GRAY, LIGHT_BLUE,
-} = colors;
+const { LIGHT_GRAY, LINE_GRAY } = colors;
 
 const Container = styled.div`
   border: 1px solid ${LINE_GRAY};
@@ -36,7 +34,7 @@ type Props = {
 };
 
 export const ShortInput: React.FC<Props> = ({
-  value, onChange, title, name, type = 'text',
+  value, onChange, title, type = 'text',
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);

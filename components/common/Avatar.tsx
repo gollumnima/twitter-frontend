@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 
 const { LINE_GRAY } = colors;
-const { SMALL, MEDIUM, LARGE } = SIZE;
 
 type Props = {
   src?: string;
@@ -23,9 +22,9 @@ const Image = styled.img`
   cursor: ${(props: StyledProps) => (props.isClickable ? 'pointer' : 'initial')};
 
   ${({ size }: StyledProps) => {
-    if (size === SMALL) return ({ width: '40px', height: '40px' });
-    if (size === MEDIUM) return ({ width: '48px', height: '48px' });
-    if (size === LARGE) return ({ width: '130px', height: '130px' });
+    if (size === Size.SMALL) return ({ width: '40px', height: '40px' });
+    if (size === Size.MEDIUM) return ({ width: '48px', height: '48px' });
+    if (size === Size.LARGE) return ({ width: '130px', height: '130px' });
     return '';
   }}
 

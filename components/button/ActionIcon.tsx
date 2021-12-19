@@ -5,10 +5,9 @@ import { colors } from '@styles/colors';
 const { LIGHT_GRAY } = colors;
 
 type IconProps = {
-  isActive?: false,
   number?: number,
   path: string
-}
+};
 
 const Svg = styled.svg`
   width: 18px;
@@ -21,7 +20,7 @@ const Span = styled.span`
   padding: 0 12px;
 `;
 
-export const ActionIcon = ({ isActive, number, path }: IconProps) => (
+export const ActionIcon = ({ number, path }: IconProps) => (
   <FlexWrapper>
     <Svg>
       <g>

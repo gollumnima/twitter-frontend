@@ -6,7 +6,6 @@ import { Size } from '@utils/constants';
 const {
   WHITE, LIGHT_BLUE, LIGHT_GRAY, BLACK,
 } = colors;
-// const { SMALL, MEDIUM, LARGE } = SIZE;
 
 type Props = {
   size?: Size;

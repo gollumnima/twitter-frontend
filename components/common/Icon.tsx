@@ -22,9 +22,9 @@ const UploadInput = styled.input`
 `;
 
 export const Icon = ({ path, onFileChange }: String) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLInputElement | null>(null);
   const handleUploadImage = () => {
-    if (!ref) return;
+    if (!ref.current) return;
     ref.current.click();
   };
 

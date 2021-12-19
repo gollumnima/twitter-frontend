@@ -5,21 +5,20 @@ import moment from 'moment';
 import { Avatar } from '@components/common/Avatar';
 import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import { findUser, getSelf } from '@store/user';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 import { colors } from '@styles/colors';
 import { FlexWrapper } from '@styles/common';
 import { Post } from '@components/post';
 import { ActionButton } from '@components/button/ActionButton';
 import * as S from './style';
 
-const { MEDIUM, LARGE } = SIZE;
 const { BLACK, GRAY } = colors;
 
 export default function MyPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const username = router.asPath.split('/')[2];
-  const myAccount = useAppSelector((state) => state.user.foundUser ?? {});
+  const myAccount = useAppSelector((state) => state.user.foundUser);
   const postList = useAppSelector((state) => state.post.postList ?? []);
   const myPosts = postList.filter((post) => post.User.username === username);
   const imgPosts = myPosts.filter((post) => post.images.length >= 1);
@@ -31,13 +30,16 @@ export default function MyPage() {
   }, [username]);
 
   console.log(myAccount, 'my accounts');
+
+  if (!myAccount) return null;
+
   return (
     <Wrapper>
       <S.Container>
         <S.ProfileContainer>
           <FlexWrapper>
             <div>
-              <Avatar src={myAccount.image_url} size={LARGE} />
+              <Avatar src={myAccount.image_url} size={Size.LARGE} />
               <S.Span title="true">{myAccount.name}</S.Span>
               <S.Span color={GRAY}>{`@${myAccount.username}`}</S.Span>
               <S.Span>{myAccount.description}</S.Span>
@@ -59,7 +61,7 @@ export default function MyPage() {
               </FlexWrapper>
             </div>
             <ActionButton
-              size={MEDIUM}
+              size={Size.MEDIUM}
               title="프로필 편집"
               fontColor={BLACK}
               onSubmit={() => router.push('/settings/profile')}

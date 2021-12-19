@@ -2,33 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import * as postAction from '@store/post';
 import router from 'next/router';
-import styled, { css } from 'styled-components';
 import moment from 'moment';
 import { FlexWrapper } from '@styles/common';
 import { Avatar } from '@components/common/Avatar';
 import { IconButton } from '@components/button/IconButton';
 import { colors } from '@styles/colors';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 import * as S from './styles';
 import * as TPost from '~/types/post';
 
 const {
-  LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE, LIGHT_GREEN, LIGHT_BLUE, LIGHT_RED,
+  LIGHT_GRAY, LIGHT_GREEN, LIGHT_BLUE, LIGHT_RED,
 } = colors;
-
-const { MEDIUM } = SIZE;
 
 type Props = {
   post: TPost.GetPostResponse,
-  // postId: N,
-  // userId: N,
-  // profileSrc: T,
-  // name: T,
-  // account: T,
-  // timestamp: N,
-  // contents: T,
-  // contentsSrc: T[],
-  // likes: T[],
 };
 
 export const Post: React.FC<Props> = ({
@@ -82,7 +70,7 @@ export const Post: React.FC<Props> = ({
       <S.PostContainer>
         <Avatar
           src={post.User.image_url}
-          size={MEDIUM}
+          size={Size.MEDIUM}
           onClick={() => router.push(`/user/${authorUserName}`)}
         />
         <S.ContentWrapper>

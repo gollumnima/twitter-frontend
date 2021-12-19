@@ -2,20 +2,19 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 import { FlexWrapper } from '@styles/common';
 import { Modal } from './index';
 
-const { BLACK, WHITE, LIGHT_GRAY } = colors;
-const { SMALL, LARGE } = SIZE;
+const { BLACK, LIGHT_GRAY } = colors;
 
 type Props = {
   onClick: (ev: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
-  size: 'LARGE' | 'SMALL' | 'MEDIUM'
+  size: Size
 };
 
 type StyledProps = {
-  size?: 'LARGE' | 'SMALL' | 'MEDIUM';
+  size?: Size;
   logo?: boolean;
 };
 
@@ -31,11 +30,11 @@ const Container = styled.div`
 const Wrapper = styled.div`
   background-color: ${BLACK};
   position: absolute;
-  top: ${(props: StyledProps) => ((props.size === LARGE) ? '10%' : '23%')};
+  top: ${(props: StyledProps) => ((props.size === Size.LARGE) ? '10%' : '23%')};
   left: 33%;
   padding: 1em;
   width: 600px;
-  height: ${(props: StyledProps) => (props.size === LARGE ? '700px' : '450px')};
+  height: ${(props: StyledProps) => (props.size === Size.LARGE ? '700px' : '450px')};
   border-radius: 10px;
   
 `;

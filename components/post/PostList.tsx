@@ -3,30 +3,8 @@ import { getPost, getPosts } from '@store/post';
 import { ComposeContainer } from '@components/post/ComposeContainer';
 import { twitterAPI } from '@utils/axios.wrapper';
 import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
-import { colors } from '@styles/colors';
-import styled from 'styled-components';
+import * as S from './styles';
 import { Post } from './index';
-
-const {
-  WHITE, LINE_GRAY,
-} = colors;
-
-const FixedContainer = styled.div`
-  width: 100%;
-  border-top: 1px solid ${LINE_GRAY};
-  border-bottom: 1px solid ${LINE_GRAY};
-  height: 50px;
-
-`;
-
-const Span = styled.span`
-  display: block;
-  color: ${WHITE};
-  font-size: 20px;
-  font-weight: 600;
-  margin-left: 14px;
-  margin-top: 14px;
-`;
 
 export const PostList = () => {
   const dispatch = useAppDispatch();
@@ -76,11 +54,11 @@ export const PostList = () => {
 
   return (
     <div>
-      <FixedContainer>
-        <Span>홈</Span>
-      </FixedContainer>
+      <S.FixedContainer>
+        <S.Title>홈</S.Title>
+      </S.FixedContainer>
       <ComposeContainer
-        setValue={setValue}
+        onChange={setValue}
         value={value}
         onSubmit={onSubmit}
         onFileChange={handleFileChange}

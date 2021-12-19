@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import { ProfileCard } from '@components/common/ProfileCard';
 import { ActionButton } from '@components/button/ActionButton';
 import { colors } from '@styles/colors';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 import { logout } from '@store/user';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import { SideListItem } from './SideListItem';
 
-const { SMALL, LARGE } = SIZE;
 const {
   LIGHT_GRAY, WHITE, LINE_GRAY, BLACK,
 } = colors;
@@ -45,7 +44,7 @@ const ButtonWrapper = styled.div`
 export const SideBar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const userInfo = useAppSelector((state) => state.user.userInfo ?? {});
+  const userInfo = useAppSelector((state) => state.user.userInfo ?? null);
 
   const handleLogout = () => {
     router.push('/');
@@ -72,6 +71,8 @@ export const SideBar = () => {
       onClick: () => router.push(`/user/${username}`),
     },
   ];
+
+  if (!userInfo) return null;
   return (
     <Nav>
       <Svg>
@@ -92,14 +93,14 @@ export const SideBar = () => {
       <ButtonWrapper>
         <ActionButton
           fontColor={WHITE}
-          size={LARGE}
+          size={Size.LARGE}
           title="트윗하기"
           onSubmit={() => { }}
         />
         <br />
         <ActionButton
           fontColor={BLACK}
-          size={LARGE}
+          size={Size.LARGE}
           title="로그아웃"
           onSubmit={handleLogout}
         />
@@ -110,7 +111,7 @@ export const SideBar = () => {
         name={name}
         account={username}
         // buttonType="more"
-        size={SMALL}
+        size={Size.SMALL}
       />
     </Nav>
   );

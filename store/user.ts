@@ -32,7 +32,6 @@ export const userSlice = createSlice({
     setUserInfo: (state, action: PayloadAction<IUserInfo | null>) => {
       // eslint-disable-next-line no-param-reassign
       state.userInfo = action.payload;
-      console.log(action.payload, 'payload');
     },
     setFoundUser: (state, action: PayloadAction<IUserInfo | null>) => {
       // eslint-disable-next-line no-param-reassign
@@ -48,12 +47,13 @@ const {
 } = userSlice.actions;
 
 // eslint-disable-next-line max-len
-export const signUp = <T>(username: T, name: T, password: T) => async (dispatch: (fnc: object) => void) => {
+export const signUp = <T>(username: T, name: T, password: T, description: T) => async (dispatch: (fnc: object) => void) => {
   try {
     await twitterAPI.post('/api/users', {
       username,
       name,
       password,
+      description,
     });
   } catch (err) {
     console.error((err as Error).message);

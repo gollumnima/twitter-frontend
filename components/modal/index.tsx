@@ -14,5 +14,6 @@ export const Modal: React.FC<Props> = ({ children }) => {
     setMounted(true);
   }, [ref]);
 
-  return (mounted ? createPortal(children, ref.current) : null);
+  if (!mounted) return null;
+  return ref.current && createPortal(children, ref.current);
 };

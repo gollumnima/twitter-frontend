@@ -2,8 +2,24 @@ import styled, { css } from 'styled-components';
 import { colors } from '@styles/colors';
 
 const {
-  LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE, LIGHT_GREEN, LIGHT_BLUE, LIGHT_RED,
+  LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE,
 } = colors;
+
+export const FixedContainer = styled.div`
+  width: 100%;
+  border-top: 1px solid ${LINE_GRAY};
+  border-bottom: 1px solid ${LINE_GRAY};
+  height: 50px;
+`;
+
+export const Title = styled.span`
+  display: block;
+  color: ${WHITE};
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 14px;
+  margin-top: 14px;
+`;
 
 export const Container = styled.article`
   border-bottom: 1px solid ${LINE_GRAY};

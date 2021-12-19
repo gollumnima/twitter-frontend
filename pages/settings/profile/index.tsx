@@ -1,18 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useReducerState, useAppSelector } from '@utils/hooksUtil';
 import { ModalContainer } from '@components/modal/ModalContainer';
 import { Avatar } from '@components/common/Avatar';
 import { ShortInput } from '@components/common/ShortInput';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 import { colors } from '@styles/colors';
 import { ActionButton } from '@components/button/ActionButton';
 import { twitterAPI } from '@utils/axios.wrapper';
 
-const { SMALL, MEDIUM, LARGE } = SIZE;
 const {
-  WHITE, LIGHT_BLUE, LIGHT_GRAY, BLACK,
+  WHITE, BLACK,
 } = colors;
 
 const UploadInput = styled.input`
@@ -41,14 +40,19 @@ const Span = styled.span`
 
 export default function ProfileSetting() {
   const router = useRouter();
-  const ref = useRef<HTMLDivElement>(null);
-  const myAccount = useAppSelector((state) => state.user.foundUser ?? {});
+  const ref = useRef<HTMLInputElement | null>(null);
+  const myAccount = useAppSelector((state) => state.user.foundUser ?? null);
   const [isHover, setIsHover] = useState(false);
   const [imageURL, setImageURL] = useState('');
-  const [state, setState] = useReducerState({
-    username: myAccount.username,
-    name: myAccount.name,
-    description: myAccount.description,
+  const [state, setState] = useReducerState<{
+    username: string,
+    name: string,
+    description: string,
+    password: string
+  }>({
+    username: myAccount?.username ?? '',
+    name: myAccount?.name ?? '',
+    description: myAccount?.description ?? '',
     password: '',
   });
 
@@ -56,8 +60,9 @@ export default function ProfileSetting() {
     username, name, description, password,
   } = state;
 
-  const handleProfileImage = async (e) => {
-    const [file] = e.target.files;
+  const handleProfileImage = async (e:React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return undefined;
+    const file = e.target.files[0];
     const formData = new FormData();
 
     formData.append('file', file);
@@ -70,11 +75,11 @@ export default function ProfileSetting() {
         },
       },
     );
-    setImageURL(data.url);
+    return setImageURL(data.url);
   };
 
   const handleUploadImage = () => {
-    if (!ref) return;
+    if (!ref.current) return;
     ref.current.click();
   };
 
@@ -86,7 +91,7 @@ export default function ProfileSetting() {
         description,
         password,
       });
-      router.push(`/user/${myAccount.username}`);
+      router.push(`/user/${myAccount?.username}`);
     } catch (err) {
       console.error(err);
     }
@@ -94,11 +99,14 @@ export default function ProfileSetting() {
 
   return (
     <ModalContainer
-      onClick={() => router.push(`/user/${myAccount.username}`)}
-      size={LARGE}
+      onClick={() => router.push(`/user/${myAccount?.username}`)}
+      size={Size.LARGE}
     >
       <div>
-        <AvatarWrapper onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+        <AvatarWrapper
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+        >
           <UploadInput
             type="file"
             ref={ref}
@@ -106,8 +114,8 @@ export default function ProfileSetting() {
             onChange={handleProfileImage}
           />
           <Avatar
-            src={imageURL?.length > 0 ? imageURL : myAccount.image_url}
-            size={LARGE}
+            src={imageURL?.length > 0 ? imageURL : myAccount?.image_url}
+            size={Size.LARGE}
             onClick={handleUploadImage}
           />
           {
@@ -115,33 +123,34 @@ export default function ProfileSetting() {
           }
         </AvatarWrapper>
         <ShortInput
-          setValue={setState}
+          onChange={(value) => setState({ username: value })}
           name="username"
           value={username}
           title="계정"
         />
         <ShortInput
-          setValue={setState}
+          onChange={(value) => setState({ name: value })}
           name="name"
           value={name}
           title="닉네임"
         />
         <ShortInput
-          setValue={setState}
+          onChange={(value) => setState({ description: value })}
           name="description"
           value={description}
           title="자기소개"
         />
         <ShortInput
-          setValue={setState}
+          onChange={(value) => setState({ password: value })}
           name="password"
+          type="password"
           value={password}
           title="비밀번호"
         />
         <ActionButton
           title="저장"
           fontColor={BLACK}
-          size={MEDIUM}
+          size={Size.MEDIUM}
           onSubmit={handleProfileInfo}
         />
       </div>

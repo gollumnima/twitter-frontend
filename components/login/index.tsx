@@ -5,13 +5,11 @@ import { ModalContainer } from '@components/modal/ModalContainer';
 import { ActionButton } from '@components/button/ActionButton';
 import { colors } from '@styles/colors';
 import { Size } from '@utils/constants';
-import styled from 'styled-components';
-import { getToken, login } from '@store/user';
+import { login } from '@store/user';
 import { ShortInput } from '@components/common/ShortInput';
 import * as S from './styles';
 
-// const { SMALL, MEDIUM, LARGE } = SIZE;
-const { LIGHT_GRAY, WHITE, LIGHT_BLUE } = colors;
+const { WHITE } = colors;
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -38,10 +36,10 @@ export default function Login() {
   return (
     <ModalContainer
       onClick={() => router.push('/')}
-      size="SMALL"
+      size={Size.SMALL}
     >
       <S.Wrapper>
-        <S.Span size="LARGE">트위터에 로그인하기</S.Span>
+        <S.Span size={Size.LARGE}>트위터에 로그인하기</S.Span>
         <br />
         <ShortInput
           onChange={(value) => setState({ username: value })}
@@ -58,12 +56,12 @@ export default function Login() {
         />
         <br />
         <ActionButton
-          size="LARGE"
+          size={Size.LARGE}
           fontColor={WHITE}
           title="로그인"
           onSubmit={onLogin}
         />
-        <S.Span size="MEDIUM">
+        <S.Span size={Size.MEDIUM}>
           계정이 없으신가요?
           <S.Blue onClick={() => router.push('/')}>가입하기</S.Blue>
         </S.Span>

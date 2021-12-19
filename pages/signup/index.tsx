@@ -3,12 +3,11 @@ import { useAppDispatch, useReducerState } from '@utils/hooksUtil';
 import { ModalContainer } from '@components/modal/ModalContainer';
 import { ActionButton } from '@components/button/ActionButton';
 import { colors } from '@styles/colors';
-import { SIZE } from '@utils/constants';
+import { Size } from '@utils/constants';
 import styled from 'styled-components';
 import { signUp } from '@store/user';
 import { ShortInput } from '@components/common/ShortInput';
 
-const { SMALL, LARGE } = SIZE;
 const { LIGHT_GRAY, WHITE } = colors;
 type Props = {
 
@@ -42,7 +41,7 @@ export default function SignUp() {
   return (
     <ModalContainer
       onClick={() => router.push('/')}
-      size={SMALL}
+      size={Size.SMALL}
     >
       <>
         <Span>계정을 생성하세요</Span>
@@ -50,28 +49,28 @@ export default function SignUp() {
           title="닉네임"
           name="username"
           value={username}
-          setValue={setState}
+          onChange={(value) => setState({ username: value })}
         />
         <ShortInput
           title="이름"
           name="name"
           value={name}
-          setValue={setState}
+          onChange={(value) => setState({ name: value })}
         />
         <ShortInput
           title="비밀번호"
           name="password"
           value={password}
-          setValue={setState}
+          onChange={(value) => setState({ password: value })}
         />
         <ShortInput
           title="자기소개"
           name="description"
           value={description}
-          setValue={setState}
+          onChange={(value) => setState({ description: value })}
         />
         <ActionButton
-          size={LARGE}
+          size={Size.LARGE}
           fontColor={WHITE}
           title="회원가입"
           onSubmit={onSignUp}

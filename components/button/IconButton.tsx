@@ -12,7 +12,7 @@ type Props = {
   activatedColor?: string;
 };
 
-const Svg = styled.svg`
+const Svg = styled.svg<{ activatedColor?: string, color?: string }>`
   fill: ${(props) => props.activatedColor || LIGHT_GRAY};
   width: 20px;
   height: 20px;
@@ -20,7 +20,6 @@ const Svg = styled.svg`
 
   &:hover {
     fill: ${(props) => props.color || LIGHT_GRAY};
-
   }
 `;
 
