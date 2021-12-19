@@ -14,19 +14,20 @@ type Props = {
   value: string;
   setValue: (value: string) => void;
   onSubmit: (e: React.MouseEvent) => void;
-  onFileChange: (e: React.MouseEvent) => void;
+  onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const ComposeContainer: React.FC<Props> = ({
   setValue, value, onSubmit, onFileChange,
 }) => {
   const userInfo = useAppSelector((state) => state.user.userInfo);
-  const { image_url: IMAGE_URL } = userInfo;
+  // if (!userInfo) return null
+  // const { image_url: IMAGE_URL } = userInfo;
   return (
     <S.ComposeWrapper>
       <S.OuterContainer>
         <Avatar
-          src={IMAGE_URL}
+          src={userInfo?.image_url}
           size={MEDIUM}
         />
         <S.InnerContainer style={{ width: '100%' }}>

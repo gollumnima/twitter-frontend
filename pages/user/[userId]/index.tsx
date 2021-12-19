@@ -91,18 +91,10 @@ export default function MyPage() {
           && <S.Span space="true"> 아직 작성한 글이 없습니다.</S.Span>
         }
         {
-          [myPosts, imgPosts][tab === 'tweet' ? 0 : 1].map((post, index) => (
+          [myPosts, imgPosts][tab === 'tweet' ? 0 : 1].map((post) => (
             <Post
-              postId={post.id}
-              userId={post.user_id}
-              key={`${Date.now()}_${index}`}
-              profileSrc={post.profileSrc}
-              name={post.User.name}
-              account={post.User.username}
-              timestamp={post.created_at}
-              contents={post.content}
-              contentsSrc={post.images ?? []}
-              likes={post.Likes}
+              key={post.id}
+              post={post}
             />
           ))
         }

@@ -13,6 +13,9 @@ module.exports = {
     project: './tsconfig.json'
   },
   rules: {
+    // '@typescript-eslint/indent': 'off',
+    // 'indent': ['error', 2],
+    'import/extensions': 'off',
     'react/function-component-definition': 'off',
     'import/prefer-default-export': 'off',
     'react/react-in-jsx-scope': 'off',

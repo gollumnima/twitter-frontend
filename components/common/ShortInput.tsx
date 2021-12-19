@@ -29,25 +29,26 @@ const Span = styled.span`
 
 type Props = {
   value: string;
-  setValue: (value: string) => void;
+  type?: string;
+  onChange: (value: string) => void;
   title: string;
   name: string;
 };
 
 export const ShortInput: React.FC<Props> = ({
-  value, setValue, title, name,
+  value, onChange, title, name, type = 'text',
 }) => {
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue({ [name]: e.target.value });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
   };
 
   return (
     <Container>
       <Span>{title}</Span>
       <Input
-        onChange={onChange}
+        onChange={handleChange}
         value={value}
-        type={name === 'password' ? 'password' : 'text'}
+        type={type}
       />
     </Container>
 

@@ -15,43 +15,27 @@ interface IUserInfo {
 
 type UserStateType = {
   token: string | null;
-  userInfo: IUserInfo
-  foundUser: IUserInfo;
+  userInfo: IUserInfo | null
+  foundUser: IUserInfo | null;
 };
 
 const initialState: UserStateType = {
   token: null,
-  userInfo: {
-    id: 0,
-    created_at: '',
-    deleted_at: '',
-    username: '',
-    description: '',
-    image_url: '',
-    name: '',
-    updated_at: '',
-  },
-  foundUser: {
-    id: 0,
-    created_at: '',
-    deleted_at: '',
-    username: '',
-    description: '',
-    image_url: '',
-    name: '',
-    updated_at: '',
-  },
+  userInfo: null,
+  foundUser: null,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserInfo: (state, action: PayloadAction) => {
+    setUserInfo: (state, action: PayloadAction<IUserInfo | null>) => {
+      // eslint-disable-next-line no-param-reassign
       state.userInfo = action.payload;
       console.log(action.payload, 'payload');
     },
-    setFoundUser: (state, action: PayloadAction) => {
+    setFoundUser: (state, action: PayloadAction<IUserInfo | null>) => {
+      // eslint-disable-next-line no-param-reassign
       state.foundUser = action.payload;
     },
   },
@@ -76,23 +60,28 @@ export const signUp = <T>(username: T, name: T, password: T) => async (dispatch:
   }
 };
 
-// eslint-disable-next-line max-len
-export const login = <T>(username: T, password: T, callback?: (args: object) => void) => async (dispatch: (param: object | null) => void) => {
-  try {
-    const { data } = await twitterAPI.post('/api/users/login', {
-      username,
-      password,
-    });
-    const { user, token } = data;
-    dispatch(setUserInfo(user));
-    authToken.set(token);
-    if (callback) return callback(user);
-  } catch (err) {
-    dispatch(setUserInfo(null));
-    authToken.remove();
-    console.error(err);
-  }
-};
+export const login = <T>(
+  username: T,
+  password: T,
+  callback?: (args: object) => void,
+) => async (dispatch: (param: object | null) => void) => {
+    try {
+      const { data } = await twitterAPI.post('/api/users/login', {
+        username,
+        password,
+      });
+      const { user, token } = data;
+      dispatch(setUserInfo(user));
+      authToken.set(token);
+      if (callback) return callback(user);
+      return null;
+    } catch (err) {
+      dispatch(setUserInfo(null));
+      authToken.remove();
+      console.error(err);
+      return null;
+    }
+  };
 
 export const getSelf = () => (dispatch: (param: object | null) => void) => {
   twitterAPI.get('/api/users/self').then(({ data }) => {

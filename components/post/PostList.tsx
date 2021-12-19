@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getPost, getPosts } from '@store/post';
 import { ComposeContainer } from '@components/post/ComposeContainer';
 import { twitterAPI } from '@utils/axios.wrapper';
@@ -43,9 +43,11 @@ export const PostList = () => {
     dispatch(getPost(data.id));
   };
 
-  const handleFileChange = async (e) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const [file] = e.target.files;
+    if (!e.target.files) return undefined;
+    // const file = Array.from(e.target.files);
+    const file = e.target.files[0];
     const formData = new FormData();
     formData.append('file', file);
     const { data } = await twitterAPI.post(
@@ -57,7 +59,7 @@ export const PostList = () => {
         },
       },
     );
-    setImageURL(data.url);
+    return setImageURL(data.url);
   };
 
   const onSubmit = async () => {
@@ -84,18 +86,10 @@ export const PostList = () => {
         onFileChange={handleFileChange}
       />
       {
-        postList?.map((post, index) => (
+        postList?.map((post) => (
           <Post
-            postId={post.id}
-            userId={post.user_id}
-            key={`${Date.now()}_${index}`}
-            profileSrc={post.profileSrc}
-            name={post.User.name}
-            account={post.User.username}
-            timestamp={post.created_at}
-            contents={post.content}
-            contentsSrc={post.images ?? []}
-            likes={post.Likes}
+            key={post.id}
+            post={post}
           />
         ))
       }

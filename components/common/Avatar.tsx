@@ -6,7 +6,7 @@ const { LINE_GRAY } = colors;
 const { SMALL, MEDIUM, LARGE } = SIZE;
 
 type Props = {
-  src: string;
+  src?: string;
   size: string;
   onClick?: () => void;
 };
@@ -31,7 +31,7 @@ const Image = styled.img`
 
 `;
 
-export const Avatar = ({ src, size, onClick }: Props) => (
+export const Avatar: React.FC<Props> = ({ src, size, onClick }) => (
   <Image
     src={src ?? 'https://cdn.pixabay.com/photo/2016/09/28/02/14/user-1699635_960_720.png'}
     alt="profile image"

@@ -10,11 +10,12 @@ const { BLACK, WHITE, LIGHT_GRAY } = colors;
 const { SMALL, LARGE } = SIZE;
 
 type Props = {
-  onClick: () => void;
+  onClick: (ev: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
+  size: 'LARGE' | 'SMALL' | 'MEDIUM'
 };
 
 type StyledProps = {
-  size: string;
+  size?: 'LARGE' | 'SMALL' | 'MEDIUM';
   logo?: boolean;
 };
 
