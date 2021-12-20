@@ -1,8 +1,8 @@
 import {
-  createSlice, PayloadAction, createAsyncThunk, ActionCreatorWithPayload,
+  createSlice, PayloadAction,
 } from '@reduxjs/toolkit';
 import { twitterAPI } from '@utils/axios.wrapper';
-import { MaybePromise, DispatchInThunk } from '~/types';
+import { DispatchInThunk } from '~/types';
 import * as TPost from '~/types/post';
 
 const initialState: TPost.PostState = {

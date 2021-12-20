@@ -12,7 +12,7 @@ export const PostList = () => {
 
   const [value, setValue] = useState('');
   const [postID, setPostID] = useState(null);
-  const [content, setContent] = useState('');
+  // const [content, setContent] = useState('');
   const [imageURL, setImageURL] = useState('');
 
   const handleTempPost = async () => {
@@ -51,6 +51,9 @@ export const PostList = () => {
     handleTempPost();
     dispatch(getPosts());
   }, []);
+
+  // TODO: using imageURL, set image preview.
+  console.log(imageURL);
 
   return (
     <div>

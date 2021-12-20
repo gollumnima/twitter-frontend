@@ -15,6 +15,7 @@ const Container = styled.div`
 const Input = styled.input`
   all: unset;
   display: block;
+  width: 100%;
   margin-top: 5px;
   color: ${LIGHT_GRAY};
 `;

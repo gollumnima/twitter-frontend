@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import * as postAction from '@store/post';
 import router from 'next/router';

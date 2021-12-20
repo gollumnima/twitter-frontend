@@ -6,7 +6,7 @@ const { LIGHT_BLUE } = colors;
 
 type String = {
   path: string;
-  onFileChange?: () => void;
+  onFileChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Svg = styled.svg`

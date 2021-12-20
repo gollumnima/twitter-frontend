@@ -2,7 +2,11 @@ import React from 'react';
 import { FlexWrapper } from '@styles/common';
 import { Icon } from './Icon';
 
-export const ComposeIconContainer = ({ onFileChange }) => {
+type Props = {
+  onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const ComposeIconContainer: React.FC<Props> = ({ onFileChange }) => {
   const iconList = [
     {
       id: 0,

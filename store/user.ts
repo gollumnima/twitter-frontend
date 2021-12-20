@@ -47,9 +47,9 @@ const {
 } = userSlice.actions;
 
 // eslint-disable-next-line max-len
-export const signUp = <T>(username: T, name: T, password: T, description: T) => async (dispatch: (fnc: object) => void) => {
+export const signUp = <T>(username: T, name: T, password: T, description: T) => {
   try {
-    await twitterAPI.post('/api/users', {
+    twitterAPI.post('/api/users', {
       username,
       name,
       password,

@@ -1,35 +1,17 @@
 import { ModalContainer } from '@components/modal/ModalContainer';
+import { Size } from '@utils/constants';
 import styled from 'styled-components';
-
-type PostProps<T, N> = {
-  postId: N,
-  userId: N,
-  profileSrc: T,
-  name: T,
-  account: T,
-  timestamp: N,
-  contents: T,
-  contentsSrc: T[],
-  likes: T[],
-};
 
 const Container = styled.div`
   display: flex;
 `;
 
-const ImageBox = styled.img`
-
-`;
-
-export default function ImageModal({
-  postId, userId, profileSrc, name, account, timestamp, contents, contentsSrc, likes, children,
-}: PostProps<string, number>) {
-  console.log('hshs');
+export default function ImageModal() {
+  // TODO:image modal
   return (
-    <ModalContainer onClick={() => { }}>
+    <ModalContainer onClick={() => { }} size={Size.LARGE}>
       <Container>
-        {/* <ImageBox src={contentsSrc[0].url} /> */}
-
+        <div />
       </Container>
     </ModalContainer>
   );

@@ -8,6 +8,9 @@ import { Size } from '@utils/constants';
 import { colors } from '@styles/colors';
 import styled from 'styled-components';
 
+type Props = {
+};
+
 const {
   LIGHT_GRAY, WHITE, LIGHT_BLUE,
 } = colors;
@@ -15,9 +18,6 @@ const {
 interface StyledString {
   size: string;
 }
-
-type Props = {
-};
 
 const Svg = styled.svg`
   display: block;
@@ -35,7 +35,7 @@ const Span = styled.span`
   color: ${WHITE};
 `;
 
-export default function Content() {
+export const Content :React.FC<Props> = () => {
   const router = useRouter();
   const userInfo = useAppSelector((state) => state.user.userInfo);
 
@@ -87,4 +87,6 @@ export default function Content() {
       }
     </div>
   );
-}
+};
+
+export default Content;

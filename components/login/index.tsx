@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useReducer } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useReducerState } from '@utils/hooksUtil';
 import { ModalContainer } from '@components/modal/ModalContainer';
