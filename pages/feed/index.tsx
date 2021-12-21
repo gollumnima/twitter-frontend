@@ -1,8 +1,10 @@
 import { PostList } from '@components/post/PostList';
 import { Wrapper } from '@components/wrapper';
 
-export const Feed = () => (
+const Feed = () => (
   <Wrapper>
     <PostList />
   </Wrapper>
 );
+
+export default Feed;

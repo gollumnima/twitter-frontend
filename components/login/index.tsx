@@ -7,7 +7,7 @@ import { colors } from '@styles/colors';
 import { Size } from '@utils/constants';
 import { login } from '@store/user';
 import { ShortInput } from '@components/common/ShortInput';
-import * as S from './styles';
+import * as S from './style';
 
 const { WHITE } = colors;
 
@@ -35,8 +35,8 @@ export default function Login() {
 
   return (
     <ModalContainer
-      onClick={() => router.push('/')}
-      size={Size.SMALL}
+      onClose={() => router.push('/')}
+      size={Size.MEDIUM}
     >
       <S.Wrapper>
         <S.Span size={Size.LARGE}>트위터에 로그인하기</S.Span>

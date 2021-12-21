@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useAppSelector } from '@utils/hooksUtil';
-import { Feed } from '@pages/feed';
+import Feed from '@pages/feed';
 import { FlexWrapper } from '@styles/common';
 import { ActionButton } from '@components/button/ActionButton';
 import { Size } from '@utils/constants';

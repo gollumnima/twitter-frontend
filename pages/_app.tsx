@@ -13,7 +13,7 @@ import '@styles/reset.css';
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const modalList = ['/signup', '/login', '/settings/profile'];
+  const modalList = ['/signup', '/login', '/settings/profile', '/compose'];
   return (
     <Provider store={store}>
       <GlobalStyle />

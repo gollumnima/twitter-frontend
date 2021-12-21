@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { getPost, getPosts } from '@store/post';
-import { ComposeContainer } from '@components/post/ComposeContainer';
+import { useAppDispatch } from '@utils/hooksUtil';
 import { twitterAPI } from '@utils/axios.wrapper';
-import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
-import * as S from './style';
-import { Post } from './index';
+import router from 'next/router';
+import { ComposeContainer } from '../post/ComposeContainer';
 
-export const PostList = () => {
+export const Compose = () => {
   const dispatch = useAppDispatch();
-  const postList = useAppSelector((state) => state.post.postList);
 
   const [value, setValue] = useState('');
   const [postID, setPostID] = useState(null);
-  // const [content, setContent] = useState('');
   const [imageURL, setImageURL] = useState('');
 
   const handleTempPost = async () => {
     const { data } = await twitterAPI.post('/api/posts');
     setPostID(data.id);
     dispatch(getPost(data.id));
+  };
+
+  const onSubmit = async () => {
+    await twitterAPI.put(`/api/posts/${postID}`, {
+      content: value,
+      status: 'PUBLISHED',
+    });
+    dispatch(getPosts());
+    router.push('/');
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,43 +46,17 @@ export const PostList = () => {
     return setImageURL(data.url);
   };
 
-  const onSubmit = async () => {
-    await twitterAPI.put(`/api/posts/${postID}`, {
-      content: value,
-      status: 'PUBLISHED',
-    });
-
-    dispatch(getPosts());
-    setValue('');
-  };
-
   useEffect(() => {
     handleTempPost();
     dispatch(getPosts());
   }, []);
 
-  //  TODO: using imageURL, set image preview.
-  console.log(imageURL);
-
   return (
-    <div>
-      <S.FixedContainer>
-        <S.Title>홈</S.Title>
-      </S.FixedContainer>
-      <ComposeContainer
-        onChange={setValue}
-        value={value}
-        onSubmit={onSubmit}
-        onFileChange={handleFileChange}
-      />
-      {
-        postList?.map((post) => (
-          <Post
-            key={post.id}
-            post={post}
-          />
-        ))
-      }
-    </div>
+    <ComposeContainer
+      onChange={setValue}
+      value={value}
+      onSubmit={onSubmit}
+      onFileChange={handleFileChange}
+    />
   );
 };

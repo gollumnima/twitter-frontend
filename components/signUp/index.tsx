@@ -36,8 +36,8 @@ export default function SignUp() {
 
   return (
     <ModalContainer
-      onClick={() => router.push('/')}
-      size={Size.SMALL}
+      onClose={() => router.push('/')}
+      size={Size.MEDIUM}
     >
       <>
         <Span>계정을 생성하세요</Span>

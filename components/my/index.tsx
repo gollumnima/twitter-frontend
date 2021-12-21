@@ -29,8 +29,6 @@ export default function MyAccount() {
     dispatch(findUser(username));
   }, [username]);
 
-  console.log(myAccount, 'my accounts');
-  console.log(postList, 'poli');
   if (!myAccount) return null;
 
   return (

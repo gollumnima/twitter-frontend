@@ -94,7 +94,7 @@ export const SideBar = () => {
           fontColor={WHITE}
           size={Size.LARGE}
           title="트윗하기"
-          onSubmit={() => { }}
+          onSubmit={() => router.push('/compose')}
         />
         <br />
         <ActionButton

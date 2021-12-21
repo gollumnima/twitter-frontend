@@ -24,6 +24,8 @@ export const Title = styled.span`
 export const Container = styled.article`
   border-bottom: 1px solid ${LINE_GRAY};
   padding: 10px 10px;
+  
+  cursor: pointer;
 `;
 
 export const Span = styled.span<{

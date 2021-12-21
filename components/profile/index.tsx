@@ -73,7 +73,7 @@ export default function ProfileSetting() {
 
   return (
     <ModalContainer
-      onClick={() => router.push(`/user/${myAccount?.username}`)}
+      onClose={() => router.push(`/user/${myAccount?.username}`)}
       size={Size.LARGE}
     >
       <div>
