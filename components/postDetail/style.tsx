@@ -5,10 +5,21 @@ const {
   LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE,
 } = colors;
 
-export const FixedContainer = styled.div`
-  width: 100%;
-  border-top: 1px solid ${LINE_GRAY};
+export const InnerWrapper = styled.div`
+  display: block;
+  margin-left: 275px;
+`;
+
+export const CommentBoxWrapper = styled.div`
+  width: 600px;
+  padding: 10px 10px;
   border-bottom: 1px solid ${LINE_GRAY};
+`;
+
+export const FixedContainer = styled.div`
+  position: fixed;
+  width: 620px;
+  border: 1px solid ${LINE_GRAY};
   height: 50px;
 `;
 
@@ -22,6 +33,8 @@ export const Title = styled.span`
 `;
 
 export const Container = styled.article`
+  width: 600px;
+  margin-top: 50px;
   border-bottom: 1px solid ${LINE_GRAY};
   padding: 10px 10px;
   

@@ -16,6 +16,7 @@ export const InnerContainer = styled.div`
   margin-left: 14px;
 `;
 export const ComposeWrapper = styled.div`
+  margin-top: 50px;
   width: 100%;
 `;
 

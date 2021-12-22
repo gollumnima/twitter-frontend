@@ -2,7 +2,7 @@ import { useRef, useLayoutEffect, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
 
-const { BLACK, LIGHT_GRAY } = colors;
+const { BLACK, LIGHT_GRAY, GRAY } = colors;
 const minHeight = 28;
 
 const Container = styled.div`
@@ -21,17 +21,18 @@ const TextArea = styled.textarea<{
   background-color: ${BLACK};
   color: ${LIGHT_GRAY};
   ::placeholder {
-    color: ${LIGHT_GRAY};
-    font-size: 17px;
+    color: ${GRAY};
+    font-size: 20px;
   }
 `;
 
 type Props = {
   value: string;
+  option?: string;
   onChange: (value: string) => void;
 };
 
-export const TextField: React.FC<Props> = ({ value, onChange }) => {
+export const TextField: React.FC<Props> = ({ value, onChange, option }) => {
   const ref = useRef<HTMLTextAreaElement | null>(null);
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value);
 
@@ -46,7 +47,7 @@ export const TextField: React.FC<Props> = ({ value, onChange }) => {
   return (
     <Container>
       <TextArea
-        placeholder="무슨 일이 일어나고 있나요?"
+        placeholder={option === 'comment' ? '댓글을 달아주세요' : '무슨 일이 일어나고 있나요?'}
         ref={ref}
         onChange={handleChange}
         value={value}

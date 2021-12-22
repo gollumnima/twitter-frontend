@@ -59,7 +59,7 @@ export const PostList = () => {
   console.log(imageURL);
 
   return (
-    <div>
+    <S.OuterWrapper>
       <S.FixedContainer>
         <S.Title>홈</S.Title>
       </S.FixedContainer>
@@ -77,6 +77,6 @@ export const PostList = () => {
           />
         ))
       }
-    </div>
+    </S.OuterWrapper>
   );
 };

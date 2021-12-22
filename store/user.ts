@@ -83,16 +83,16 @@ export const login = <T>(
     }
   };
 
+export const logout = () => (dispatch: (param: object | null) => void) => {
+  authToken.remove();
+  dispatch(setUserInfo(null));
+};
+
 export const getSelf = () => (dispatch: (param: object | null) => void) => {
   twitterAPI.get('/api/users/self').then(({ data }) => {
     dispatch(setUserInfo(data));
     console.log('로그인한 사용자의 username 👉', data.username);
   });
-};
-
-export const logout = () => (dispatch: (param: object | null) => void) => {
-  authToken.remove();
-  dispatch(setUserInfo(null));
 };
 
 export const findUser = (username: string) => (async (dispatch: (param: object | null) => void) => {

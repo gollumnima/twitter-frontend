@@ -1,5 +1,6 @@
 export const colors = {
-  BLACK: '#101010',
+  // BLACK: '#101010',
+  BLACK: '#000000',
   HOVER_BLACK: '#1E2125',
   LIGHT_GRAY: '#D9D9D9',
   GRAY: '#6E767D',

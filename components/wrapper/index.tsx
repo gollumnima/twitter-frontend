@@ -1,5 +1,5 @@
 import { FlexWithFullWidth } from '@styles/common';
-import { SideBar } from './SideBar';
+import { SideBar } from './sidebar/index';
 
 type Props = {
 };

@@ -1,36 +1,23 @@
 import { FlexWrapper } from '@styles/common';
-import styled from 'styled-components';
-import { colors } from '@styles/colors';
-
-const { LIGHT_GRAY } = colors;
+import * as S from './style';
 
 type IconProps = {
   number?: number,
   path: string
+  onClick?: (e:React.MouseEvent) => void;
 };
 
-const Svg = styled.svg`
-  width: 18px;
-  height: 18px;
-  fill: ${LIGHT_GRAY};
-`;
-const Span = styled.span`
-  font-size: 13px;
-  color: ${LIGHT_GRAY};
-  padding: 0 12px;
-`;
-
-export const ActionIcon = ({ number, path }: IconProps) => (
+export const ActionIcon = ({ number, path, onClick }: IconProps) => (
   <FlexWrapper>
-    <Svg>
+    <S.Svg onClick={onClick}>
       <g>
         <path d={path} />
       </g>
-    </Svg>
+    </S.Svg>
     {
       number
         && (
-          <Span>{number}</Span>
+          <S.Span>{number}</S.Span>
         )
     }
   </FlexWrapper>

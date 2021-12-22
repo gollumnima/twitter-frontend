@@ -13,6 +13,7 @@ type StyledProps = {
 };
 
 export const Container = styled.div`
+  margin-left: 275px;
   width: 590px;
   height: 100vh;
 `;

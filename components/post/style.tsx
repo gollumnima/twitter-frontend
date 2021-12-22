@@ -2,13 +2,18 @@ import styled, { css } from 'styled-components';
 import { colors } from '@styles/colors';
 
 const {
-  LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE,
+  LINE_GRAY, GRAY, LIGHT_GRAY, BLACK, WHITE, LIGHT_BLUE,
 } = colors;
 
+export const OuterWrapper = styled.div`
+  margin-left: 275px;
+`;
+
 export const FixedContainer = styled.div`
-  width: 100%;
-  border-top: 1px solid ${LINE_GRAY};
-  border-bottom: 1px solid ${LINE_GRAY};
+  position: fixed;
+  width: 584px;
+  background-color: ${BLACK};
+  border: 1px solid ${LINE_GRAY};
   height: 50px;
 `;
 
@@ -26,6 +31,11 @@ export const Container = styled.article`
   padding: 10px 10px;
   
   cursor: pointer;
+`;
+
+export const Blue = styled.span`
+  font-weight: 600;
+  color: ${LIGHT_BLUE};
 `;
 
 export const Span = styled.span<{
