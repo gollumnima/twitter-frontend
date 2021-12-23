@@ -24,3 +24,9 @@ export const BottomWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const PreviewImg = styled.img`
+  width: 500px;
+  height: 335px;
+  border-radius: 20px;
+`;

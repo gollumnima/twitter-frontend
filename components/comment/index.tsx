@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppDispatch } from '@utils/hooksUtil';
 import { Size } from '@utils/constants';
 import { colors } from '~/styles/colors';
@@ -12,13 +12,16 @@ import { getComments } from '~/store/comment';
 type Props = {
   postId: number;
   option?: string;
+  value: string;
+  setValue: (value: string) => void;
 };
 
 const { WHITE } = colors;
 
-export const CommentBox: React.FC<Props> = ({ postId, option }) => {
+export const CommentBox: React.FC<Props> = ({
+  postId, option, value, setValue,
+}) => {
   const dispatch = useAppDispatch();
-  const [value, setValue] = useState('');
 
   const handleComment = async () => {
     try {
@@ -31,6 +34,7 @@ export const CommentBox: React.FC<Props> = ({ postId, option }) => {
       console.error(err);
     }
   };
+
   return (
     <FlexWrapper>
       <Avatar size={Size.MEDIUM} />

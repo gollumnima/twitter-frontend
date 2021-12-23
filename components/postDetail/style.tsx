@@ -103,7 +103,7 @@ export const TitleWrapper = styled.div`
 
 export const Image = styled.img`
   width: 490px;
-  height: 200px;
+  height: 335px;
   border-radius: 20px;
 
   margin-top: 8px;

@@ -12,7 +12,6 @@ export const Compose = () => {
   const [postID, setPostID] = useState(null);
   const [imageURL, setImageURL] = useState('');
 
-  console.log(imageURL, 'image');
   const handleTempPost = async () => {
     const { data } = await twitterAPI.post('/api/posts');
     setPostID(data.id);
@@ -58,6 +57,7 @@ export const Compose = () => {
       value={value}
       onSubmit={onSubmit}
       onFileChange={handleFileChange}
+      previewImageURL={imageURL}
     />
   );
 };

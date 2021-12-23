@@ -25,8 +25,13 @@ export const CommentThread: React.FC<Props> = ({ comment, post, handleDeleteComm
 
   const [isOpen, setIsOpen] = useState(false);
 
-  if (!userInfo) return null;
+  const deleteComment = () => {
+    handleDeleteComment();
+    setIsOpen(false);
+  };
 
+  if (!userInfo) return null;
+  console.log(comment, 'comment');
   return (
     <S.Container>
       <S.PostContainer>
@@ -48,18 +53,17 @@ export const CommentThread: React.FC<Props> = ({ comment, post, handleDeleteComm
               <S.Span>{`@${authorUserName} ·`}</S.Span>
               <S.Span>{moment(comment.created_at).fromNow()}</S.Span>
             </FlexWrapper>
-            {
-                commentedAuthorId === loggedId && (
-                <IconButton
-                  option="MENU"
-                  shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
-                  onClick={() => setIsOpen(!isOpen)}
-                  isOpen={isOpen}
-                >
-                  <S.MenuItem onClick={handleDeleteComment}>댓글 삭제하기</S.MenuItem>
-                </IconButton>
-                )
-            }
+            {commentedAuthorId === loggedId && (
+              <IconButton
+                option="MENU"
+                shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
+                onClick={() => setIsOpen(!isOpen)}
+                isOpen={isOpen}
+              >
+                <S.MenuItem onClick={deleteComment}>댓글 삭제하기</S.MenuItem>
+                <S.MenuItem>댓글 수정하기</S.MenuItem>
+              </IconButton>
+            )}
           </S.TitleWrapper>
           <S.Span>
             <S.Blue>

@@ -55,3 +55,16 @@ export const deleteComment = (postId : number) => async (dispatch: DispatchInThu
     console.error(err);
   }
 };
+
+export const updateComment = (
+  commentId: number,
+  postId: number,
+  content: string,
+) => async (dispatch: DispatchInThunk) => {
+  try {
+    await twitterAPI.put(`/api/comments/${commentId}`, { content });
+    dispatch(getComments(postId));
+  } catch (err) {
+    console.error(err);
+  }
+};

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { ComposeIconContainer } from '@components/common/ComposeIconContainer';
 import { Avatar } from '@components/common/Avatar';
 import { TextField } from '@components/common/TextField';
@@ -14,14 +15,22 @@ type Props = {
   onChange: (value: string) => void;
   onSubmit: (e: React.MouseEvent) => void;
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  previewImageURL?: string | undefined;
 };
 
 export const ComposeContainer: React.FC<Props> = ({
-  onChange, value, onSubmit, onFileChange,
+  onChange, value, onSubmit, onFileChange, previewImageURL,
 }) => {
   const userInfo = useAppSelector((state) => state.user.userInfo);
-  // if (!userInfo) return null
-  // const { image_url: IMAGE_URL } = userInfo;
+  const [imageURL, setImageURL] = useState('');
+
+  useEffect(() => {
+    if (!previewImageURL) return;
+    setImageURL(previewImageURL);
+  }, [previewImageURL]);
+
+  // TODO: preview image rendering issue 해결하기
+
   return (
     <S.ComposeWrapper>
       <S.OuterContainer>
@@ -31,6 +40,7 @@ export const ComposeContainer: React.FC<Props> = ({
         />
         <S.InnerContainer style={{ width: '100%' }}>
           <TextField onChange={onChange} value={value} />
+          { imageURL && <S.PreviewImg src={imageURL} alt="preview_image" />}
           <S.BottomWrapper>
             <ComposeIconContainer onFileChange={onFileChange} />
             <ActionButton

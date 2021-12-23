@@ -7,7 +7,7 @@ type Props = {
   shape: string;
   option?: string;
   isOpen?: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
   color?: string;
   activatedColor?: string;
 };
