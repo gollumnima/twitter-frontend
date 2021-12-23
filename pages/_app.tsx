@@ -7,11 +7,15 @@ import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import store from '@store/index';
 import GlobalStyle from '@styles/index';
-import Content from './index';
+import moment from 'moment';
+import 'moment/locale/ko';
+import { Content } from './index';
+
 import '@styles/reset.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  moment.locale('ko');
 
   const modalList = ['/signup', '/login', '/settings/profile', '/compose'];
   return (

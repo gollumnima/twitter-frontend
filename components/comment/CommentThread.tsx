@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import router from 'next/router';
 import moment from 'moment';
 import * as S from '@components/post/style';
@@ -8,37 +8,23 @@ import { IconButton } from '../button/IconButton';
 import { Avatar } from '../common/Avatar';
 import * as TPost from '~/types/post';
 import * as TComment from '~/types/comment';
-import { useAppDispatch, useAppSelector } from '~/utils/hooksUtil';
-import { findUser } from '~/store/user';
-
-interface IcommentEntity {
-  comment: TComment.ICommentEntity
-}
+import { useAppSelector } from '~/utils/hooksUtil';
 
 type Props = {
-  comment: IcommentEntity,
+  comment: TComment.ICommentEntity,
   post: TPost.GetPostResponse,
-  handleDeleteComment: (e: MouseEvent) => void,
+  handleDeleteComment: () => void,
 };
 
 export const CommentThread: React.FC<Props> = ({ comment, post, handleDeleteComment }) => {
-  const dispatch = useAppDispatch();
-  const authorUserName = comment.User.username;
+  const authorUserName = post.User.name;
   const commentedAuthorId = comment.user_id;
   const userInfo = useAppSelector((state) => state.user.userInfo);
-  const foundUser = useAppSelector((state) => state.user.foundUser);
 
-  const authorUserNickName = foundUser?.name ?? '';
   const loggedId = userInfo?.id;
 
-  const [isOpen, setIsOpen] = useState(false); 7;
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (!comment) return;
-    dispatch(findUser(comment?.User.username));
-  }, []);
-
-  console.log(comment, 'CO');
   if (!userInfo) return null;
 
   return (
@@ -57,22 +43,23 @@ export const CommentThread: React.FC<Props> = ({ comment, post, handleDeleteComm
                 underline="true"
                 onClick={() => router.push(`/user/${authorUserName}`)}
               >
-                {authorUserNickName}
+                {comment.User.username}
               </S.Span>
               <S.Span>{`@${authorUserName} ·`}</S.Span>
-              <S.Span>{moment(comment.created_at, 'YYYYMMDD').fromNow()}</S.Span>
+              <S.Span>{moment(comment.created_at).fromNow()}</S.Span>
             </FlexWrapper>
-            <IconButton
-              option="MENU"
-              shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
-              onClick={() => setIsOpen(!isOpen)}
-              isOpen={isOpen}
-            >
-              {
-                commentedAuthorId === loggedId
-                && <S.MenuItem onClick={handleDeleteComment}>댓글 삭제하기</S.MenuItem>
-              }
-            </IconButton>
+            {
+                commentedAuthorId === loggedId && (
+                <IconButton
+                  option="MENU"
+                  shape="M2,6C0.896,6,0,6.896,0,8s0.896,2,2,2s2-0.896,2-2S3.104,6,2,6z M8,6C6.896,6,6,6.896,6,8s0.896,2,2,2s2-0.896,2-2  S9.104,6,8,6z M14,6c-1.104,0-2,0.896-2,2s0.896,2,2,2s2-0.896,2-2S15.104,6,14,6z"
+                  onClick={() => setIsOpen(!isOpen)}
+                  isOpen={isOpen}
+                >
+                  <S.MenuItem onClick={handleDeleteComment}>댓글 삭제하기</S.MenuItem>
+                </IconButton>
+                )
+            }
           </S.TitleWrapper>
           <S.Span>
             <S.Blue>

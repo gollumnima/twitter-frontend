@@ -1,7 +1,7 @@
 import * as TUser from './user';
 
 export interface ICommentEntity {
-  User: Pick<TUser.IUserEntity, 'id' | 'username' | 'image_url'>;
+  User: Pick<TUser.IUserEntity, 'id' | 'username' | 'image_url' | 'name'>;
   id: number;
   content: string;
   post_id: number;

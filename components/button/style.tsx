@@ -18,7 +18,7 @@ export const Span = styled.span`
   padding: 0 12px;
 `;
 
-export const AButton = styled.button<{ size: string, fontColor: string }>`
+export const AButton = styled.button<{ size: string, fontColor: string | null | undefined }>`
 all: unset;
 text-align: center;
 padding: 16px 16px;
@@ -42,7 +42,7 @@ ${({ size }) => {
 
 `;
 
-export const ASpan = styled.span<{ size: Size, fontColor: string }>`
+export const ASpan = styled.span<{ size: Size, fontColor: string | null | undefined }>`
   font-size: 17px;
   font-weight: 700;
 

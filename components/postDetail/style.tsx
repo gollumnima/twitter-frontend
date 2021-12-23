@@ -21,6 +21,8 @@ export const FixedContainer = styled.div`
   width: 620px;
   border: 1px solid ${LINE_GRAY};
   height: 50px;
+  background-color: ${BLACK};
+  z-index: 100;
 `;
 
 export const Title = styled.span`

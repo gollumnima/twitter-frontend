@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
+import React, { useState } from 'react';
+import { useAppDispatch } from '@utils/hooksUtil';
 import { Size } from '@utils/constants';
 import { colors } from '~/styles/colors';
 import { FlexWrapper } from '~/styles/common';

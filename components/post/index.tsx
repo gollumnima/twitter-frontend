@@ -64,9 +64,7 @@ export const Post: React.FC<Props> = ({
     },
   ];
 
-  const enterDetailPage = (e: MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const enterDetailPage = () => {
     router.push(`/user/${authorUserName}/status/${postId}`);
   };
 
@@ -92,7 +90,7 @@ export const Post: React.FC<Props> = ({
                 {post.User.name}
               </S.Span>
               <S.Span>{`@${authorUserName} ·`}</S.Span>
-              <S.Span>{moment(post.created_at, 'YYYYMMDD').fromNow()}</S.Span>
+              <S.Span>{moment(post.created_at).fromNow()}</S.Span>
             </FlexWrapper>
 
             <IconButton

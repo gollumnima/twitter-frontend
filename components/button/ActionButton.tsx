@@ -5,7 +5,7 @@ import * as S from './style';
 type Props = {
   size?: Size;
   title?: string;
-  fontColor?: string | null;
+  fontColor?: string | null | undefined;
   onSubmit: (e: React.MouseEvent) => void;
 };
 

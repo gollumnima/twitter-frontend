@@ -50,6 +50,7 @@ export const getComments = (postId : number) => async (dispatch: DispatchInThunk
 export const deleteComment = (postId : number) => async (dispatch: DispatchInThunk) => {
   try {
     await twitterAPI.delete(`/api/comments/${postId}`);
+    dispatch(getComments(postId));
   } catch (err) {
     console.error(err);
   }
