@@ -15,7 +15,7 @@ import * as S from './style';
 import { findUser } from '~/store/user';
 import { ActionIcon } from '../button/ActionIcon';
 import { CommentThread } from '../comment/CommentThread';
-import { deleteComment, getComments } from '~/store/comment';
+import { deleteComment, getComments, updateComment } from '~/store/comment';
 
 const {
   LIGHT_GRAY, LIGHT_GREEN, LIGHT_BLUE, LIGHT_RED,
@@ -55,6 +55,11 @@ export const PostDetail: React.FC = () => {
     navigator.clipboard.writeText(`http://localhost:3000/user/${authorUserName}/status/${postId}`);
   };
 
+  const handleDeleteComment = () => {
+    dispatch(deleteComment(postId));
+    dispatch(getComments(postId));
+  };
+
   const iconList = [
     {
       key: 'comment',
@@ -78,11 +83,6 @@ export const PostDetail: React.FC = () => {
       onClick: handleLikePost,
     },
   ];
-
-  const handleDeleteComment = () => {
-    dispatch(deleteComment(postId));
-    dispatch(getComments(postId));
-  };
 
   useEffect(() => {
     if (typeof postId !== 'number' || typeof authorUserName !== 'string') return;

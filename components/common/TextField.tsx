@@ -44,6 +44,8 @@ export const TextField: React.FC<Props> = ({ value, onChange, option }) => {
     ref.current.style.height = `${Math.max(ref.current.scrollHeight, minHeight)}px`;
   }, [value]);
 
+  console.log(value, '타이핑');
+
   return (
     <Container>
       <TextArea

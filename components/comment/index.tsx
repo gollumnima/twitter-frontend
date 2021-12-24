@@ -22,7 +22,6 @@ export const CommentBox: React.FC<Props> = ({
   postId, option, value, setValue,
 }) => {
   const dispatch = useAppDispatch();
-
   const handleComment = async () => {
     try {
       await twitterAPI.post(`/api/comments/${postId}`, {

@@ -9,28 +9,39 @@ import { Avatar } from '../common/Avatar';
 import * as TPost from '~/types/post';
 import * as TComment from '~/types/comment';
 import { useAppSelector } from '~/utils/hooksUtil';
+import { Editable } from './Editable';
 
 type Props = {
   comment: TComment.ICommentEntity,
   post: TPost.GetPostResponse,
   handleDeleteComment: () => void,
+  handleUpdateComment: () => void
 };
 
-export const CommentThread: React.FC<Props> = ({ comment, post, handleDeleteComment }) => {
+export const CommentThread: React.FC<Props> = ({
+  comment, post, handleDeleteComment,
+}) => {
   const authorUserName = post.User.name;
   const commentedAuthorId = comment.user_id;
   const userInfo = useAppSelector((state) => state.user.userInfo);
 
   const loggedId = userInfo?.id;
 
+  const [value, setValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
 
   const deleteComment = () => {
     handleDeleteComment();
     setIsOpen(false);
   };
 
-  if (!userInfo) return null;
+  const handleUpdateComment = () => {
+    setIsOpen(false);
+    setIsEditable(true);
+  };
+
+  if (!userInfo || !comment) return null;
   console.log(comment, 'comment');
   return (
     <S.Container>
@@ -61,7 +72,7 @@ export const CommentThread: React.FC<Props> = ({ comment, post, handleDeleteComm
                 isOpen={isOpen}
               >
                 <S.MenuItem onClick={deleteComment}>댓글 삭제하기</S.MenuItem>
-                <S.MenuItem>댓글 수정하기</S.MenuItem>
+                <S.MenuItem onClick={handleUpdateComment}>댓글 수정하기</S.MenuItem>
               </IconButton>
             )}
           </S.TitleWrapper>
@@ -73,7 +84,9 @@ export const CommentThread: React.FC<Props> = ({ comment, post, handleDeleteComm
             님에게 보내는 댓글
           </S.Span>
           <br />
-          <S.Span primary="true">{comment.content}</S.Span>
+          {
+            isEditable ? <Editable setValue={setValue} value={comment.content} /> : <S.Span primary="true">{comment.content}</S.Span>
+          }
         </S.ContentWrapper>
       </S.PostContainer>
       <br />
