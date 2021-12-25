@@ -53,7 +53,7 @@ export const PostList = () => {
   useEffect(() => {
     handleTempPost();
     dispatch(getPosts());
-  }, [dispatch, handleTempPost]);
+  }, []);
 
   //  TODO: using imageURL, set image preview.
   console.log(imageURL);

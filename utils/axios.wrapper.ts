@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { URL } from '@utils/constants';
+import { authToken } from '@utils/localStorage.wrapper';
 
 const twitterAPI = axios.create({
   baseURL: URL,
 });
 
 twitterAPI.interceptors.request.use((req) => {
-  const authToken = localStorage.getItem('twitter-login-token');
-  const authHeader = authToken ? `Bearer ${authToken}` : '';
+  const token = authToken.get();
+  const authHeader = token ? `Bearer ${token}` : '';
 
   return {
     ...req,

@@ -25,7 +25,6 @@ export default function MyAccount() {
   const [tab, setTab] = useState('tweet');
 
   useEffect(() => {
-    dispatch(getSelf());
     dispatch(findUser(username));
   }, [username, dispatch]);
 

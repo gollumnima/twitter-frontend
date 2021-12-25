@@ -9,8 +9,8 @@ import store from '@store/index';
 import GlobalStyle from '@styles/index';
 import moment from 'moment';
 import 'moment/locale/ko';
+import BootStrap from '~/components/common/BootStrap';
 import { Content } from './index';
-
 import '@styles/reset.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -25,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Twitter Project!!</title>
       </Head>
+      <BootStrap />
       <ThemeProvider theme={theme}>
         {
           modalList.includes(router.pathname)
