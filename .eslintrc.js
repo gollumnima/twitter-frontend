@@ -14,6 +14,7 @@ module.exports = {
     project: './tsconfig.json'
   },
   rules: {
+    'no-console': 'warn',
     'import/extensions': 'off',
     'react/function-component-definition': 'off',
     'import/prefer-default-export': 'off',

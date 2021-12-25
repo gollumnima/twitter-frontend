@@ -8,7 +8,6 @@ import * as TComment from '~/types/comment';
 const initialState: TComment.CommentState = {
   comment: null,
   commentList: [],
-  isEditable: false,
 };
 
 const commentSlice = createSlice({

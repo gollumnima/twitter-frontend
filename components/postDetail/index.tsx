@@ -15,7 +15,7 @@ import * as S from './style';
 import { findUser } from '~/store/user';
 import { ActionIcon } from '../button/ActionIcon';
 import { CommentThread } from '../comment/CommentThread';
-import { deleteComment, getComments, updateComment } from '~/store/comment';
+import { deleteComment, getComments } from '~/store/comment';
 
 const {
   LIGHT_GRAY, LIGHT_GREEN, LIGHT_BLUE, LIGHT_RED,

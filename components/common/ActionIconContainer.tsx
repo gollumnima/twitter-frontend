@@ -18,9 +18,9 @@ const iconpathList = [
 export const ActionIconContainer = () => (
   <FlexWrapper>
     {
-      iconpathList.map((icon, i) => (
+      iconpathList.map((icon) => (
         <ActionIcon
-          key={i}
+          key={icon.id}
           path={icon.path}
         />
       ))

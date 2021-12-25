@@ -8,26 +8,27 @@ import { IconButton } from '../button/IconButton';
 import { Avatar } from '../common/Avatar';
 import * as TPost from '~/types/post';
 import * as TComment from '~/types/comment';
-import { useAppSelector } from '~/utils/hooksUtil';
+import { useAppSelector, useAppDispatch } from '~/utils/hooksUtil';
 import { Editable } from './Editable';
+import { updateComment } from '~/store/comment';
 
 type Props = {
   comment: TComment.ICommentEntity,
   post: TPost.GetPostResponse,
   handleDeleteComment: () => void,
-  handleUpdateComment: () => void
 };
 
 export const CommentThread: React.FC<Props> = ({
   comment, post, handleDeleteComment,
 }) => {
+  const dispatch = useAppDispatch();
   const authorUserName = post.User.name;
   const commentedAuthorId = comment.user_id;
   const userInfo = useAppSelector((state) => state.user.userInfo);
 
   const loggedId = userInfo?.id;
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(comment.content);
   const [isOpen, setIsOpen] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
 
@@ -41,8 +42,17 @@ export const CommentThread: React.FC<Props> = ({
     setIsEditable(true);
   };
 
+  const saveComment = () => {
+    dispatch(updateComment(comment.id, post.id, value));
+    setIsEditable(false);
+  };
+
+  const onCancel = () => {
+    setIsEditable(false);
+  };
+
   if (!userInfo || !comment) return null;
-  console.log(comment, 'comment');
+
   return (
     <S.Container>
       <S.PostContainer>
@@ -85,7 +95,14 @@ export const CommentThread: React.FC<Props> = ({
           </S.Span>
           <br />
           {
-            isEditable ? <Editable setValue={setValue} value={comment.content} /> : <S.Span primary="true">{comment.content}</S.Span>
+            isEditable ? (
+              <Editable
+                setValue={setValue}
+                value={value}
+                saveComment={saveComment}
+                onCancel={onCancel}
+              />
+            ) : <S.Span primary="true">{comment.content}</S.Span>
           }
         </S.ContentWrapper>
       </S.PostContainer>

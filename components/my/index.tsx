@@ -27,7 +27,7 @@ export default function MyAccount() {
   useEffect(() => {
     dispatch(getSelf());
     dispatch(findUser(username));
-  }, [username]);
+  }, [username, dispatch]);
 
   if (!myAccount) return null;
 

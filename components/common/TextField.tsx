@@ -1,4 +1,6 @@
-import { useRef, useLayoutEffect, ChangeEvent } from 'react';
+import {
+  useRef, useEffect, useLayoutEffect, ChangeEvent,
+} from 'react';
 import styled from 'styled-components';
 import { colors } from '@styles/colors';
 
@@ -37,14 +39,17 @@ export const TextField: React.FC<Props> = ({ value, onChange, option }) => {
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value);
 
   useLayoutEffect(() => {
-    if (!ref) return;
-    if (!ref.current) return;
+    if (!ref?.current) return;
     // when delete texts, shrink textarea
     ref.current.style.height = 'inherit';
     ref.current.style.height = `${Math.max(ref.current.scrollHeight, minHeight)}px`;
   }, [value]);
 
-  console.log(value, '타이핑');
+  useEffect(() => {
+    if (!ref?.current) return;
+    ref.current.focus();
+    ref.current.setSelectionRange(value.length, value.length);
+  }, [ref]);
 
   return (
     <Container>
