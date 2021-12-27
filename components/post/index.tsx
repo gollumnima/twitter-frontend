@@ -34,9 +34,10 @@ export const Post: React.FC<Props> = ({
 
   const handleLikePost = (e:MouseEvent) => {
     e.stopPropagation();
-    return (isLikedPost
+    setIsOpen(false);
+    return isLikedPost
       ? dispatch(postAction.unlikePost(postId))
-      : dispatch(postAction.likePost(postId)));
+      : dispatch(postAction.likePost(postId));
   };
 
   const handleDeletePost = () => {

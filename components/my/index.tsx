@@ -98,9 +98,6 @@ export default function MyAccount() {
           ))
         }
       </S.Container>
-      <S.RightSideBar>
-        <span>dd</span>
-      </S.RightSideBar>
     </Wrapper>
   );
 }

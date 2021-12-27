@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@utils/hooksUtil';
 import { getPost } from '@store/post';
@@ -39,7 +39,8 @@ export const PostDetail: React.FC = () => {
   const loggedId = userInfo?.id;
   const isLikedPost = post?.Likes.some((like) => like.user_id === loggedId);
 
-  const handleLikePost = () => {
+  const handleLikePost = (e:MouseEvent) => {
+    e.stopPropagation();
     if (typeof postId !== 'number') return null;
     return (isLikedPost
       ? dispatch(postAction.unlikePost(postId))

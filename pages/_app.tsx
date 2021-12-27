@@ -12,9 +12,11 @@ import 'moment/locale/ko';
 import BootStrap from '~/components/common/BootStrap';
 import { Content } from './index';
 import '@styles/reset.css';
+import { authToken } from '~/utils/localStorage.wrapper';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const token = authToken.get() ?? '';
   moment.locale('ko');
 
   const modalList = ['/signup', '/login', '/settings/profile', '/compose'];
@@ -25,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Twitter Project!!</title>
       </Head>
-      <BootStrap />
+      { token.length >= 1 ? <BootStrap /> : null}
       <ThemeProvider theme={theme}>
         {
           modalList.includes(router.pathname)

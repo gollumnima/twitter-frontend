@@ -89,10 +89,14 @@ export const logout = () => (dispatch: (param: object | null) => void) => {
 };
 
 export const getSelf = () => (dispatch: (param: object | null) => void) => {
-  twitterAPI.get('/api/users/self').then(({ data }) => {
-    dispatch(setUserInfo(data));
-    console.log('로그인한 사용자의 username 👉', data.username);
-  });
+  try {
+    twitterAPI.get('/api/users/self').then(({ data }) => {
+      dispatch(setUserInfo(data));
+      console.log('로그인한 사용자의 username 👉', data.username);
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const findUser = (username: string) => (async (dispatch: (param: object | null) => void) => {

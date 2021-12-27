@@ -6,16 +6,16 @@ class LocalStorage {
   }
 
   get(): string | null {
-    const value = localStorage.getItem(this.key);
+    const value = typeof window !== 'undefined' ? localStorage.getItem(this.key) : null;
     return value;
   }
 
   set(value: string) {
-    localStorage.setItem(this.key, value);
+    return typeof window !== 'undefined' ? localStorage.setItem(this.key, value) : null;
   }
 
   remove() {
-    localStorage.removeItem(this.key);
+    return typeof window !== 'undefined' ? localStorage.removeItem(this.key) : null;
   }
 }
 

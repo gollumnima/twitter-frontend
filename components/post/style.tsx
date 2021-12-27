@@ -11,10 +11,11 @@ export const OuterWrapper = styled.div`
 
 export const FixedContainer = styled.div`
   position: fixed;
-  width: 584px;
+  width: 679px;
   background-color: ${BLACK};
   border: 1px solid ${LINE_GRAY};
   height: 50px;
+  z-index: 100;
 `;
 
 export const Title = styled.span`
@@ -47,6 +48,7 @@ export const Span = styled.span<{
   color: ${(props) => (props.primary ? LIGHT_GRAY : GRAY)};
   font-weight: ${(props) => (props.title ? 600 : 400)};
   margin-right: 10px;
+  margin-top: 10px;
 
   ${(props) => props.underline && css`
     &:hover {
