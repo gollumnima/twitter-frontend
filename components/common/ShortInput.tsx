@@ -28,14 +28,13 @@ const Span = styled.span`
 
 type Props = {
   value: string;
-  type?: string;
   onChange: (value: string) => void;
   title: string;
   name: string;
 };
 
 export const ShortInput: React.FC<Props> = ({
-  value, onChange, title, type = 'text',
+  value, onChange, title,
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -47,7 +46,7 @@ export const ShortInput: React.FC<Props> = ({
       <Input
         onChange={handleChange}
         value={value}
-        type={type}
+        type={title === '비밀번호' ? 'password' : 'text'}
       />
     </Container>
 

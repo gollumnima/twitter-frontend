@@ -9,3 +9,7 @@ export interface IUserEntity {
   updated_at: string;
   deleted_at: string;
 }
+export interface IFollows {
+  follower_id: number,
+  followee_id: number
+}

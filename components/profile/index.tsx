@@ -117,7 +117,6 @@ export default function ProfileSetting() {
         <ShortInput
           onChange={(value) => setState({ password: value })}
           name="password"
-          type="password"
           value={password}
           title="비밀번호"
         />

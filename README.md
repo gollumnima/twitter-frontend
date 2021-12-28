@@ -5,21 +5,16 @@
  
 ## 시연 영상
 
-준비중입니다.
+!['twitter_preview'](https://github.com/gollumnima/twitter-frontend/blob/main/public/media/twitter_preview.gif)
 
 ## 🍎 구현한 기능
 
-- 회원가입 
-- 로그인 
-- 게시글 작성
-- modal
-
-## 🍏 구현중인 기능
-- 매끄러운 랜더링
+- 회원가입 및 로그인
+- 게시글 및 댓글 작성
+- Next modal
+- 이미지 업로드 기능
+- 좋아요 및 팔로우 기능
 - 프로필 수정 기능
-- 팔로우 기능
-- 좋아요 기능
-- 책갈피 기능
 
 ## 👩🏻‍💻 Development Stack
 
@@ -37,6 +32,6 @@
 <tr><td>Back-end</td>
 <td>node, express</td></tr>
 <tr><td>Formatting</td>
-<td>eslint, prettier</td></tr>
+<td>eslint based on Airbnb</td></tr>
 </tbody>
 </table>

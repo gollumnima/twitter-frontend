@@ -32,8 +32,7 @@ export const Post: React.FC<Props> = ({
   const loggedId = userInfo?.id;
   const isLikedPost = post.Likes.some((like) => like.user_id === loggedId);
 
-  const handleLikePost = (e:MouseEvent) => {
-    e.stopPropagation();
+  const handleLikePost = () => {
     setIsOpen(false);
     return isLikedPost
       ? dispatch(postAction.unlikePost(postId))
@@ -77,6 +76,11 @@ export const Post: React.FC<Props> = ({
     router.push(`/user/${authorUserName}/status/${postId}`);
   };
 
+  const enterProfilePage = (e: MouseEvent) => {
+    e.stopPropagation();
+    router.push(`/user/${authorUserName}`);
+  };
+
   if (!userInfo || !authorUserName) return null;
 
   return (
@@ -85,7 +89,7 @@ export const Post: React.FC<Props> = ({
         <Avatar
           src={post.User.image_url}
           size={Size.MEDIUM}
-          onClick={() => router.push(`/user/${authorUserName}`)}
+          onClick={enterProfilePage}
         />
         <S.ContentWrapper>
           <S.TitleWrapper>
@@ -94,7 +98,7 @@ export const Post: React.FC<Props> = ({
                 primary="true"
                 title="true"
                 underline="true"
-                onClick={() => router.push(`/user/${authorUserName}`)}
+                onClick={enterProfilePage}
               >
                 {post.User.name}
               </S.Span>

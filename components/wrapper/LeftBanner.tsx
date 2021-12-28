@@ -34,10 +34,10 @@ export const LeftBanner: React.FC<Props> = () => {
         <S.Title>나를 위한 트랜드</S.Title>
         {
         items.map((item) => (
-          <>
+          <React.Fragment key={item.id}>
             <S.BannerItem sub>{item.sub.length >= 1 && item.sub}</S.BannerItem>
             <S.BannerItem>{item.title}</S.BannerItem>
-          </>
+          </React.Fragment>
         ))
         }
       </S.BannerWrapper>
